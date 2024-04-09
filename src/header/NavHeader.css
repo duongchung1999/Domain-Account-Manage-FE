@@ -1,0 +1,35 @@
+.sb-nav-fixed .sb-topnav {
+    z-index: 1039;
+}
+.fixed-top, .sb-nav-fixed #layoutSidenav #layoutSidenav_nav, .sb-nav-fixed .sb-topnav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    background-color: #212529 !important    ;
+}
+.sb-topnav {
+    padding-left: 0;
+    height: 56px;
+    z-index: 1039;
+}
+.sb-topnav .navbar-brand {
+    width: 225px;
+    margin: 0;
+}
+
+.ps-3 {
+    padding-left: 1rem !important;
+}
+.sb-topnav.navbar-dark #sidebarToggle {
+    color: rgba(255, 255, 255, 0.5);
+}
+.ms-auto {
+    margin-left: auto !important;
+}
+.btn-link:hover{
+    color: rgba(255, 255, 255, 1) !important;
+    /* background-color: #3f6383 !important ; */
+    z-index: 1040;
+}
