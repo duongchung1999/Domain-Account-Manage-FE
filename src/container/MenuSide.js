@@ -6,25 +6,28 @@ import { NavLink } from 'react-router-dom';
 class MenuSide extends Component {
     render() {
         return (
-            <div className='menuSide sb-sidenav'>
-                <div className='menuSide-item'>
-                    <ul className="menuSide-nav">
-                        <NavItem path="/home" itemName="User Information" icon = {<i className="nav-icon fa-solid fa-users"></i>}/>
-                        <NavItem path="#!" itemName="Computer Information" icon = {<i className="nav-icon fa-solid fa-network-wired"></i>}/>
-                        <NavItem path="#!" itemName="Printer IP Address" icon = {<i className="nav-icon fa-solid fa-print"></i>}/>
-                        <NavItem path="#!" itemName="Documents" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
+            <div className='layoutContainer'>
+                <div className='menuSide sb-sidenav'>
+                    <div className='menuSide-item'>
+                        <ul className="menuSide-nav">
+                            <NavItem path="/home" itemName="User Information" icon = {<i className="nav-icon fa-solid fa-users"></i>}/>
+                            <NavItem path="#!" itemName="Computer Information" icon = {<i className="nav-icon fa-solid fa-network-wired"></i>}/>
+                            <NavItem path="#!" itemName="Printer IP Address" icon = {<i className="nav-icon fa-solid fa-print"></i>}/>
+                            <NavItem path="#!" itemName="Documents" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
+                            
+                        </ul>
                         
-                      </ul>
-                      
-                </div>
+                    </div>
 
-                <div className='menuSide-footer'>
-                    <div className="small">Logged in as</div>
-                            Foxlink IT
-                </div>
+                    <div className='menuSide-footer'>
+                        <div className="small">Logged in as</div>
+                                Foxlink IT
+                    </div>
 
-                
+                    
+                </div>
             </div>
+            
         );
     }
 }
