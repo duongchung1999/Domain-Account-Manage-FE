@@ -21,7 +21,8 @@ class MenuSide extends Component {
 
                     <div className='menuSide-footer'>
                         <div className="small">Logged in as</div>
-                                Foxlink IT
+                        <i class="fa-solid fa-diagram-project"></i>
+                        <span className="ml-2">Foxlink IT</span>
                     </div>
 
                     

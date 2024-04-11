@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect  } from 'react';
 import { useTable, useResizeColumns } from 'react-table';
 import './UserTable.css'
 
@@ -44,57 +44,66 @@ const Table = ({ columns, data }) => {
 // Sử dụng Table component
 const MyTableComponent = () => {
   const columns = [
-    {
-      Header: 'Number',
-      accessor: 'number', // Tên trường dữ liệu trong object data
-    },
+    // {
+    //   Header: 'Number',
+    //   accessor: 'number', // Tên trường dữ liệu trong object data
+    // },
     {
       Header: 'User ID',
-      accessor: 'userID',
+      accessor: 'userId',
+      width: '10%',
     },
     {
       Header: 'User Name',
       accessor: 'userName',
+      width: '30%',
     },
     {
       Header: 'Department',
       accessor: 'department',
+      width: '30%',
     },
     {
       Header: 'Description',
-      accessor: 'description',
+      accessor: 'userDescription',
+      width: '30%',
     },
   ];
 
-  const data = [
-    { number: '1', userID: 25, userName: 'New York' ,department:'IT',description:'Description 1'},
-    { number: '2', userID: 30, userName: 'Los Angeles' ,department:'IT',description:'Description 2'},
-    { number: '3', userID: 35, userName: 'Chicago',department:'IT',description:'Description 3' },
-    { number: '4', userID: 25, userName: 'New York' ,department:'IT',description:'Description 1'},
-    { number: '5', userID: 30, userName: 'Los Angeles' ,department:'IT',description:'Description 2'},
-    { number: '6', userID: 35, userName: 'Chicago',department:'IT',description:'Description 3' },
-    { number: '7', userID: 25, userName: 'New York' ,department:'IT',description:'Description 1'},
-    { number: '8', userID: 30, userName: 'Los Angeles' ,department:'IT',description:'Description 2'},
-    { number: '9', userID: 35, userName: 'Chicago',department:'IT',description:'Description 3' },
-    { number: '10', userID: 25, userName: 'New York' ,department:'IT',description:'Description 1'},
-    { number: '11', userID: 30, userName: 'Los Angeles' ,department:'IT',description:'Description 2'},
-    { number: '12', userID: 35, userName: 'Chicago',department:'IT',description:'Description 3' },
-    { number: '13', userID: 25, userName: 'New York' ,department:'IT',description:'Description 1'},
-    { number: '14', userID: 30, userName: 'Los Angeles' ,department:'IT',description:'Description 2'},
-    { number: '15', userID: 35, userName: 'Chicago',department:'IT',description:'Description 3' },
-    { number: '16', userID: 25, userName: 'New York' ,department:'IT',description:'Description 1'},
-    { number: '17', userID: 30, userName: 'Los Angeles' ,department:'IT',description:'Description 2'},
-    { number: '18', userID: 35, userName: 'Chicago',department:'IT',description:'Description 3' },
-    { number: '19', userID: 25, userName: 'New York' ,department:'IT',description:'Description 1'},
-    { number: '20', userID: 30, userName: 'Los Angeles' ,department:'IT',description:'Description 2'},
-    { number: '21', userID: 35, userName: 'Chicago',department:'IT',description:'Description 3' },
-    { number: '22', userID: 25, userName: 'New York' ,department:'IT',description:'Description 1'},
-    { number: '23', userID: 30, userName: 'Los Angeles' ,department:'IT',description:'Description 2'},
-    { number: '24', userID: 35, userName: 'Chicago',department:'IT',description:'Description 3' },
-  ];
+  const [data, setData] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/user');
+        // console.log(response);
+        const responseData = await response.json();
+        setData(responseData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    const generateNumbers = () => {
+      const numbers = [];
+      for (let i = 1; i <= 1000; i++) {
+        numbers.push({ number: i });
+      }
+      return numbers;
+    };
+
+    fetchData();
+    setData(generateNumbers());
+  }, []);
+
+
+
+
+
+
+  
   const pageCount = Math.ceil(data.length / pageSize);
 
   const slicedData = data.slice((currentPage - 1) * pageSize, currentPage * pageSize);
