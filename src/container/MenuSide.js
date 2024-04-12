@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 class MenuSide extends Component {
     render() {
         return (
-            <div className='layoutContainer'>
+            <div className='layoutContainer d-none  d-md-inline-block'>
                 <div className='menuSide sb-sidenav'>
                     <div className='menuSide-item'>
                         <ul className="menuSide-nav">

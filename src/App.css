@@ -1,4 +1,6 @@
 .layoutContainer{
+  position: sticky;
+  top: 0;
   width: 225px;
     height: 100vh;
     /* z-index: 1038; */
@@ -20,10 +22,11 @@
 
 
 /* User table Begin */
-.UserContainer, .row{
+.UserContainer, .UserContainer-block{
   display: flex;
   width: 100%;
   height: 100%;
+  margin: 0;
 }
 #table-container {
   /* width: 130vh; */
@@ -36,12 +39,11 @@
   width: 100%;
   border-radius: 10px;
 }
-
 .table th,
 .table td {
   border: 1px solid #ddd; /* Màu sắc và định dạng cho các đường viền */
   padding: 8px;
-  text-align: left;
+  text-align: center;
 }
 
 .table th {
@@ -53,5 +55,26 @@
 .btn-table{
   align-items:center;
   justify-items: right;
+}
+.table-data-container {
+  max-height: 60vh; /* Đặt chiều cao tối đa cho bảng */
+  /* display: flex; */
+  overflow-y: auto; /* Tạo thanh cuộn dọc khi cần */
+  box-shadow: 1px 1px 10px rgba(0,0,0,.15);
+}
+.table tr:hover {
+  background-color: #f2f2f2; /* Màu nền khi hover */
+}
+.table td:hover {
+  background-color: #f8b826; /* Màu nền khi ô được chọn */
+}
+
+.table-header {
+  position: sticky;
+  top: -2px;
+  z-index: 1;
+  background-color: #fff; /* Màu nền cho tiêu đề */
+  
+  box-shadow: 1px 1px 10px rgba(0,0,0,.15);
 }
 /* User table end */
