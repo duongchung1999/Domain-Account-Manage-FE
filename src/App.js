@@ -2,10 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 import NavHeader from './header/NavHeader';
 import MenuSide from './container/MenuSide';
-import MyTableComponent from './container/userTable/UserTable';
+import UserTable from './container/userTable/UserTable';
 import Searchbar from './publicComponent/Searchbar';
+import React, { Component } from 'react';
 
-function App() {
+function App(props) {
   return (
     <div className="sb-nav-fixed">
       <NavHeader/>
@@ -14,24 +15,14 @@ function App() {
           <MenuSide/>
           <div className='table-container col' id='table-container'>
             <div className='table-container-header'>
-              <h1 className='h1-table'>User Information</h1>
+              <h1 className='h1-table'>{props.h1Title}</h1>
              
               <CardBorder 
-              title = "This Table show all user accounts information of Foxlink - DN1"
-              container = {<p className="card-text">You can find any user of Foxlink - DN1</p>}>
+              title = {props.h4Title}
+              container = {<p className="card-text">{props.pContent}</p>}>
               </CardBorder>
-              <CardBorder
-              //  title = "This Table show all Users account information of Foxlink - DN1" 
-               title={
-              <div className='me-md-2 navbar'>
-                  <div>
-                    <i className="fa-solid fa-table"></i> Users Table
-                  </div>
-                  <Searchbar id = "btn-search-table" label = "Search User Id"/>
-                
-              </div>}
-               container = {<MyTableComponent/>}>
-               </CardBorder>
+              
+              {props.bodyTable}
               
 
               
