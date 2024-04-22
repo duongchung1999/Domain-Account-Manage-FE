@@ -5,9 +5,9 @@ class NavHeader extends Component {
         return (
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
                 {/* Navbar Brand*/}
-                <a className="navbar-brand ps-3" href="#!">
-                <i class="fa-solid fa-tower-broadcast"></i>
-                <span className="ml-2">Foxlink-DN1</span>
+                <a className="navbar-brand header-logo" href="#!">
+                {/* <i class="fa-solid fa-tower-broadcast"></i> */}
+                <span className="ml-2 header-logo-span"><img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="" className="img-fluid header-logo-img" /></span>
                 </a>
                 {/* Sidebar Toggle*/}
                 <button

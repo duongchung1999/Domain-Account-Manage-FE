@@ -1,12 +1,13 @@
 .menuSide{
     padding-top: 56px;
     color: rgba(255, 255, 255, 0.5);
+    
 }
 .sb-sidenav{
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 100%;
+    width: 225px;
     flex-wrap: nowrap;
 }
 .menuSide-item{
@@ -61,5 +62,6 @@
     background-color: #343a40;
     padding: 12px;
     bottom: 0;
-    margin-left: 10px;
+    padding-bottom: 20px;
+    margin: 0;
 }
