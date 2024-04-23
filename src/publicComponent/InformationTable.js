@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Searchbar from './Searchbar';
 // import Table from './Table';
 import { useTable, useResizeColumns } from 'react-table';
+const apiUrl = process.env.REACT_APP_API_URL;
+const apiPage = axios.create({
+  baseURL: apiUrl,
+});
 
 class InformationTable extends Component {
     constructor(props) {
@@ -65,8 +70,10 @@ class DataTable extends Component {
   
     fetchData = async () => {
       try {
-        const response = await fetch(this.props.api);
-        const responseData = await response.json();
+        const url = apiUrl + this.props.api;
+        console.log(url);
+        const response = await axios.get(this.props.api); 
+        const responseData = response.data;
         const newData = responseData.map((item, index) => ({ ...item, number: index + 1 }));
         this.setState({ data: newData });
       } catch (error) {

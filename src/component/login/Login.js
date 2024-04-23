@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Login.css';
 import DisplayThemeButtons from './LoginScript';
 import { Navigate  } from 'react-router-dom';
+const apiUrl = process.env.REACT_APP_API_URL;
 class Login extends Component {
     state = { user: null, error: null };
     handleSubmit = async (event) => {
@@ -16,7 +17,7 @@ class Login extends Component {
         };
 
         try {
-            const response = await fetch('/api/Account/login', {
+            const response = await fetch(apiUrl+'/api/Account/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

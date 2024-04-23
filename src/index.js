@@ -6,7 +6,7 @@ import Login from './component/login/Login';
 import UserInformation from './component/UserInformation';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter,  RouterProvider,} from "react-router-dom";
-
+import axios from 'axios'; 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const router = createBrowserRouter([

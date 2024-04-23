@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import NavHeader from './header/NavHeader';
 import MenuSide from './container/MenuSide';
-import UserTable from './container/userTable/UserTable';
 import Searchbar from './publicComponent/Searchbar';
 import React, { Component } from 'react';
 

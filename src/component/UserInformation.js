@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import App from '../App';
 import InformationTable from '../publicComponent/InformationTable';
-import UserTable from '../container/userTable/UserTable';
 
 class UserInformation extends Component {
     render() {
