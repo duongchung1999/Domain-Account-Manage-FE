@@ -20,9 +20,9 @@
 
 /* Start */
 :root {
-    --background: #1a1a2e;
-    --color: #ffffff;
-    --primary-color: #0f3460;
+    --background: #192A51;
+    --color: #FFFFFF;
+    --primary-color: #967AA1;
 }
 
 * {
@@ -33,7 +33,7 @@ html {
     scroll-behavior: smooth;
 }
 
-body {
+.container-show  {
     margin: 0;
     box-sizing: border-box;
     font-family: "poppins";
@@ -56,7 +56,7 @@ h1 {
     font-size: 2.5rem;
 }
 
-.container {
+.container-show {
     display: flex;
     justify-content: center;
     align-items: center;

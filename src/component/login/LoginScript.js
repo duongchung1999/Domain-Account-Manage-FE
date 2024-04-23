@@ -2,6 +2,11 @@ import React, { useEffect } from 'react';
 
 const themes = [
     {
+        background: "#192A51",
+        color: "#FFFFFF",
+        primaryColor: "#967AA1"
+    },
+    {
         background: "#1A1A2E",
         color: "#FFFFFF",
         primaryColor: "#0F3460"
@@ -11,11 +16,7 @@ const themes = [
         color: "#FFFFFF",
         primaryColor: "#E94560"
     },
-    {
-        background: "#192A51",
-        color: "#FFFFFF",
-        primaryColor: "#967AA1"
-    },
+    
     {
         background: "#F7B267",
         color: "#000000",
