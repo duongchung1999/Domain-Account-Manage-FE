@@ -1,0 +1,84 @@
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+.modal.open{
+    display: flex;
+}
+.modal .container{
+width: 600px;
+max-width: calc(100%-32px);
+min-height: 200px;
+background: #fff;
+position: relative;
+animation: modalFadeIn ease 0.5s;
+}
+
+.modal-header {
+    font-size: 30px;
+    color: #fff;
+    background: #009688;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    padding: 12px;
+    opacity: 0.8;
+}
+.modal-close:hover {
+    opacity: 1;
+    background: #ddd;
+}
+
+.header-bag {
+    padding-right: 15px;
+}
+
+.modal-body {
+    padding: 16px;
+}
+
+.modal-label {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.modal-input {
+    padding: 8px 0;
+    margin-bottom: 24px;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+.buy-tickets {
+    width: 100%;
+    padding: 18px 0;
+    background: #009688;
+    color: #fff;
+    border: 1px solid #fff;
+}
+
+.buy-tickets:hover {
+    background: #ccc;
+}
+
+
+.modal-help {
+    padding: 17px;
+    text-align: right;
+}

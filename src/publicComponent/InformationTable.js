@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Searchbar from './Searchbar';
+import { Button } from 'react-bootstrap';
 // import Table from './Table';
 import { useTable, useResizeColumns } from 'react-table';
 const apiUrl = process.env.REACT_APP_API_URL;
@@ -32,7 +33,11 @@ class InformationTable extends Component {
                         <h4 className="card-title">
                             <div className='me-md-2 navbar'>
                             <div>
-                                <i className="fa-solid fa-table"></i> {this.props.title}
+                                <i className="fa-solid fa-table" style={{ marginRight: '10px' }}></i> 
+                                {this.props.title}
+                                <Button variant="primary" className={`btn-add-info ${this.props.btnAdd}`} style={{ marginLeft: '20px' }}>Add</Button>
+                                <Button variant="info" style={{ marginLeft: '10px' }}>Config</Button>
+                                <Button variant="danger" style={{ marginLeft: '10px' }}>Remove</Button>
                                 </div>
                                 <Searchbar 
                                 btnID = {this.props.SearchbarId} 

@@ -4,6 +4,7 @@ import NavHeader from './header/NavHeader';
 import MenuSide from './container/MenuSide';
 import Searchbar from './publicComponent/Searchbar';
 import React, { Component } from 'react';
+import CardBorder from './publicComponent/CardBorder';
 
 class App extends Component  {
   constructor(props) {
@@ -55,17 +56,4 @@ class App extends Component  {
 
 export default App;
 
-function CardBorder(props){
-  return(
-    <div>
-      <div className="card border-primary">
-        <div className="card-body">
-          <h4 className="card-title">{props.title}</h4>
-          {props.container}
-        </div>
-      </div>
-      <br></br>
-    </div>
-      
-  )
-}
+

@@ -3,9 +3,9 @@
   top: 0;
   width: 225px;
     height: 100vh;
-    /* z-index: 1038; */
     background-color: #212529;;
 }
+
 
 
 .App-header {
@@ -78,3 +78,4 @@
   box-shadow: 1px 1px 10px rgba(0,0,0,.15);
 }
 /* User table end */
+

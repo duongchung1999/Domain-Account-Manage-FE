@@ -1,26 +1,31 @@
 import React, { Component } from 'react';
 import App from '../App';
 import InformationTable from '../publicComponent/InformationTable';
+import { Button } from 'react-bootstrap';
+import CardBorder from '../publicComponent/CardBorder';
 
 class UserInformation extends Component {
     render() {
         return (
+          <div>
             <App 
-            h1Title="User Account Information" 
-            h4Title = "This Table show all user account informations from Domain of Foxlink - DN1 Network" 
-            pContent = "You can find any user of Foxlink - DN1"
-            bodyTable = {
-            <InformationTable 
-                title="User Accounts Table" 
-                // container = {<UserTable/>}
-                btnSearchID = "btn-search-user"
-                api = "/api/user"
-                columns = {columns}
-                >
-                    
-            </InformationTable>}>
-                
-            </App>
+              h1Title="User Account Information" 
+              h4Title = "This Table show all user account informations from Domain of Foxlink - DN1 Network" 
+              pContent = "You can find any user of Foxlink - DN1"
+              bodyTable = {
+              <InformationTable 
+                  title="User Accounts Table"
+                  // container = {<UserTable/>}
+                  btnSearchID = "btn-search-user"
+                  SearchbarLavel = "Search for user"
+                  api = "/api/user"
+                  columns = {columns}
+                  >
+                      
+              </InformationTable>}>
+            </App> 
+          </div>
+            
         );
     }
 }

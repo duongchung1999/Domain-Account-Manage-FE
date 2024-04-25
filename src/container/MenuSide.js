@@ -7,7 +7,8 @@ class MenuSide extends Component {
     render() {
         const { isMenuSideVisible } = this.props;
         return (
-            <div className={isMenuSideVisible ? 'layoutContainer d-none d-md-inline-block' : 'layoutContainer d-md-inline-block'}>
+            <div className={isMenuSideVisible ? 'layoutContainer d-none d-md-inline-block' : 'layoutContainer d-none d-md-inline-block'}>
+            {/* <div className={isMenuSideVisible ? 'layoutContainer d-none d-md-inline-block' : 'layoutContainer d-none d-md-inline-block'}> */}
                 <div className='menuSide sb-sidenav'>
                     <div className='menuSide-item'>
                         <ul className="menuSide-nav">
