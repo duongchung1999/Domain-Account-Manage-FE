@@ -52,8 +52,15 @@
  { 
     /* .menuSide-nav li .nav-link.active */
     color: rgba(255, 255, 255, 1);
-    background-color: #495158 ;
+    background-color: #363b3f ;
 }
+
+.menuSide-nav li .nav-link.active{
+    background-color: #495158 ;
+    color: rgba(255, 255, 255, 1);
+    /* font-size: 16px; */
+}
+
 .nav-icon  {
     padding: 0 10px;
     width:  15px;

@@ -5,15 +5,16 @@ import { NavLink } from 'react-router-dom';
 
 class MenuSide extends Component {
     render() {
+        const { isMenuSideVisible } = this.props;
         return (
-            <div className='layoutContainer d-none  d-md-inline-block'>
+            <div className={isMenuSideVisible ? 'layoutContainer d-none d-md-inline-block' : 'layoutContainer d-md-inline-block'}>
                 <div className='menuSide sb-sidenav'>
                     <div className='menuSide-item'>
                         <ul className="menuSide-nav">
                             <NavItem path="/home" itemName="User Information" icon = {<i className="nav-icon fa-solid fa-users"></i>}/>
-                            <NavItem path="#!" itemName="Computer Information" icon = {<i className="nav-icon fa-solid fa-network-wired"></i>}/>
-                            <NavItem path="#!" itemName="Printer IP Address" icon = {<i className="nav-icon fa-solid fa-print"></i>}/>
-                            <NavItem path="#!" itemName="Documents" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
+                            <NavItem path="/computer" itemName="Computer Information" icon = {<i className="nav-icon fa-solid fa-network-wired"></i>}/>
+                            <NavItem path="/printer" itemName="Printer IP Address" icon = {<i className="nav-icon fa-solid fa-print"></i>}/>
+                            <NavItem path="/document" itemName="Documents" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
                             
                         </ul>
                         
@@ -36,7 +37,7 @@ class MenuSide extends Component {
 function NavItem(props){
     return(
         <li>
-            <NavLink to={props.path}  className="nav-link">{props.icon}  {props.itemName}</NavLink>
+            <NavLink to={props.path}  className="nav-link" activeClassName="active">{props.icon}  {props.itemName}</NavLink>
         </li>
     )
 }

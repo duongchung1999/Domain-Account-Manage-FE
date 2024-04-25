@@ -72,8 +72,9 @@ class DataTable extends Component {
       try {
         const url = apiUrl + this.props.api;
         console.log(url);
+        const response = await apiPage.get(this.props.api); 
         // const response = await axios.get(this.props.api); 
-        const response = await axios.get(this.props.api); 
+        // const response = await axios.get("https://localhost:44378/api/user"); 
         const responseData = response.data;
         const newData = responseData.map((item, index) => ({ ...item, number: index + 1 }));
         this.setState({ data: newData });

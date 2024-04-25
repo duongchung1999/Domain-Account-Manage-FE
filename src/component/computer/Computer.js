@@ -1,0 +1,56 @@
+import React, { Component } from 'react';
+import App from '../../App';
+import InformationTable from '../../publicComponent/InformationTable';
+
+class Computer extends Component {
+    render() {
+        return (
+            <App 
+            h1Title="Computer Information" 
+            h4Title = "This Table show Computer informations of Foxlink - DN1" 
+            pContent = "You can find any Computer"
+            bodyTable = {
+            <InformationTable 
+                title="Computer Table" 
+                // container = {<UserTable/>}
+                btnSearchID = "btn-search-computer"
+                api = "/api/Computer"
+                columns = {columns}
+                >
+                    
+            </InformationTable>}>
+                
+            </App>
+        );
+    }
+}
+
+export default Computer;
+
+const columns = [
+    {
+      Header: 'No',
+      accessor: 'number',
+      width: '5%',
+    },
+    {
+      Header: 'Computer Name',
+      accessor: 'cpuName',
+      width: '30%',
+    },
+    {
+      Header: 'Ip Address',
+      accessor: 'cpuIp',
+      width: '15%',
+    },
+    {
+      Header: 'Wifi MAC Address',
+      accessor: 'wifiMac',
+      width: '30%',
+    },
+    {
+        Header: 'Time Update',
+        accessor: 'timeUpdate',
+        width: '20%',
+      },
+  ];

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import './NavHeader.css'
 class NavHeader extends Component {
+    toggleMenuSideVisibility = () => {
+        // Gửi trạng thái hiện tại của MenuSide lên component cha
+        this.props.toggleMenuSide();
+    }
+
     render() {
         return (
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -10,13 +15,7 @@ class NavHeader extends Component {
                 <span className="ml-2 header-logo-span"><img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="" className="img-fluid header-logo-img" /></span>
                 </a>
                 {/* Sidebar Toggle*/}
-                <button
-                    className="btn btn-link btn-sm order-lg-0 me-4 me-lg-0"
-                    id="sidebarToggle"
-                    href="#!"
-                >
-                    <i className="fas fa-bars" />
-                </button>
+                <BtnLink toggleMenuSideVisibility={this.toggleMenuSideVisibility} /> {/* Truyền hàm xử lý xuống BtnLink */}
                 {/* Navbar Search*/}
                 <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                     <div className="input-group">
@@ -76,3 +75,15 @@ class NavHeader extends Component {
 }
 
 export default NavHeader;
+
+const BtnLink = ({ toggleMenuSideVisibility }) => {
+    return (
+        <button
+            className="btn btn-link btn-sm order-lg-0 me-4 me-lg-0"
+            id="sidebarToggle"
+            onClick={toggleMenuSideVisibility} // Gọi hàm toggleMenuSideVisibility khi click
+        >
+            <i className="fas fa-bars" />
+        </button>
+    );
+};

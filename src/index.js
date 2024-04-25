@@ -7,7 +7,12 @@ import UserInformation from './component/UserInformation';
 import reportWebVitals from './reportWebVitals';
 import {createBrowserRouter,  RouterProvider,} from "react-router-dom";
 import axios from 'axios'; 
+import PrinterInfor from './component/printer/PrinterInfor';
+import Computer from './component/computer/Computer';
+import Document from './component/document/Document';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 
 const router = createBrowserRouter([
   {
@@ -15,8 +20,24 @@ const router = createBrowserRouter([
     element: <UserInformation />,
   },
   {
+    path: "/home",
+    element: <UserInformation />,
+  },
+  {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/printer",
+    element: <PrinterInfor />,
+  },
+  {
+    path: "/computer",
+    element: <Computer />,
+  },
+  {
+    path: "/document",
+    element: <Document />,
   },
 ]);
 
