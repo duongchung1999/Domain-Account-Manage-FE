@@ -12,6 +12,7 @@ class Computer extends Component {
             bodyTable = {
             <InformationTable 
                 title="Computer Table" 
+                changeTitle="Computer Information" 
                 // container = {<UserTable/>}
                 btnSearchID = "btn-search-computer"
                 api = "/api/Computer"

@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import App from '../../App';
-
+import Modal from '../../publicComponent/modal/Modal';
 class ChangeInfo extends Component {
     render() {
         return (
-            <App 
-            h1Title="Change Information Of User" 
-            h4Title = "This function will display some public documents and some operation instructions." 
-            pContent = "IT will be updated soon!"
-            >
-                
-            </App>
+            <Modal 
+            columns={this.props.columns}
+            title={this.props.changeTitle}
+            showModal={showModal}
+            toggleModal={this.toggleModal}
+            defaultValue={rowData}
+            // defaultValue={rowData ? rowData[this.props.columns[0].accessor] : null}
+            />
         );
     }
 }

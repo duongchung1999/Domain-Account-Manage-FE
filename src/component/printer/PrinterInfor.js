@@ -11,6 +11,7 @@ class PrinterInfor extends Component {
             bodyTable = {
             <InformationTable 
                 title="Printer Table" 
+                changeTitle="Printer Information" 
                 // container = {<UserTable/>}
                 btnSearchID = "btn-search-printer"
                 api = "/api/Printers"

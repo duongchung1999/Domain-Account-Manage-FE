@@ -5,21 +5,22 @@
     right: 0;
     bottom: 0;
     background: rgba(0, 0, 0, 0.4);
-    /* display: flex; */
+    display: flex;
     align-items: center;
     justify-content: center;
-    display: none;
+    /* display: none; */
 }
 .modal.open{
     display: flex;
 }
-.modal .container{
-width: 600px;
+.modal .container1{
+width: 1000px;
 max-width: calc(100%-32px);
 min-height: 200px;
 background: #fff;
 position: relative;
 animation: modalFadeIn ease 0.5s;
+border-radius: 30px;
 }
 
 .modal-header {
@@ -30,14 +31,18 @@ animation: modalFadeIn ease 0.5s;
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    
 }
 .modal-close {
     position: absolute;
     top: 0;
     right: 0;
     color: #fff;
-    padding: 12px;
+    padding: 8px 10px;
     opacity: 0.8;
+    font-size: 26px;
+    border-radius: 10px;
 }
 .modal-close:hover {
     opacity: 1;
@@ -51,18 +56,30 @@ animation: modalFadeIn ease 0.5s;
 .modal-body {
     padding: 16px;
 }
-
-.modal-label {
-    display: block;
-    font-size: 15px;
-    margin-bottom: 12px;
+.modal-body .border-primary{
+    height: calc(100% - 24px) ;
 }
+.modal .item-change{
+    height: 50px;
+}
+.modal-label {
+    /* display: block; */
+    max-height: 100%;
+    font-size: 15px;
+    align-items: center;
+    display: flex;
+    margin: 0;
+}
+
 
 .modal-input {
     padding: 8px 0;
     margin-bottom: 24px;
-    width: 100%;
+    /* width: 100%; */
+    max-width: 100%;
+    max-height: 100%;
     border: 1px solid #ccc;
+    margin: 0;
 }
 
 .buy-tickets {
@@ -81,4 +98,10 @@ animation: modalFadeIn ease 0.5s;
 .modal-help {
     padding: 17px;
     text-align: right;
+}
+.hidden{
+    display: none;
+}
+.show{
+    display: flex;
 }

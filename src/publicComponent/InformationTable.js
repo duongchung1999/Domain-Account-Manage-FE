@@ -4,6 +4,8 @@ import Searchbar from './Searchbar';
 import { Button } from 'react-bootstrap';
 // import Table from './Table';
 import { useTable, useResizeColumns } from 'react-table';
+import Modal from './modal/Modal';
+
 const apiUrl = process.env.REACT_APP_API_URL;
 const apiPage = axios.create({
   baseURL: apiUrl,
@@ -13,9 +15,12 @@ class InformationTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchTerm: ''
+            searchTerm: '',
+            showModal: false,
+            rowData: null
         };
     }
+
     handleSearchbarValue = (value) => {
         // Xử lý giá trị state ở đây
         console.log('Searchbar value:', value);
@@ -25,7 +30,16 @@ class InformationTable extends Component {
         this.setState({ searchTerm: value });
     }
 
+    toggleModal = (rowData) => {
+      this.setState(prevState => ({ 
+        showModal: !prevState.showModal ,
+        rowData: rowData
+      }));
+      // console.log(rowData);
+    }
+
     render() {
+      const { showModal,rowData  } = this.state;
         return (
             <div>
                 <div className="card border-primary">
@@ -35,7 +49,13 @@ class InformationTable extends Component {
                             <div>
                                 <i className="fa-solid fa-table" style={{ marginRight: '10px' }}></i> 
                                 {this.props.title}
-                                <Button variant="primary" className={`btn-add-info ${this.props.btnAdd}`} style={{ marginLeft: '20px' }}>Add</Button>
+                                <Button 
+                                variant="primary" 
+                                className={`btn-show-modal ${this.props.btnAdd}`} 
+                                style={{ marginLeft: '20px' }}
+                                onClick={this.toggleModal} >
+                                  Show modal
+                                </Button>
                                 <Button variant="info" style={{ marginLeft: '10px' }}>Config</Button>
                                 <Button variant="danger" style={{ marginLeft: '10px' }}>Remove</Button>
                                 </div>
@@ -50,10 +70,19 @@ class InformationTable extends Component {
                         api = {this.props.api} 
                         columns = {this.props.columns} 
                         searchTerm={this.state.searchTerm}
+                        toggleModal={this.toggleModal}
                         />
                     </div>
                 </div>
                 <br></br>
+                <Modal 
+                columns={this.props.columns}
+                title={this.props.changeTitle}
+                showModal={showModal}
+                toggleModal={this.toggleModal}
+                defaultValue={rowData}
+                // defaultValue={rowData ? rowData[this.props.columns[0].accessor] : null}
+                />
             </div>
         );
     }
@@ -110,14 +139,14 @@ class DataTable extends Component {
   
       return (
         <div className="table-data-container">
-          <Table columns={columns} data={filteredData} />
+          <Table columns={columns} data={filteredData} toggleModal={this.props.toggleModal} />
         </div>
       );
     }
   }
 
   
-const Table = ({ columns, data }) => {
+const Table = ({ columns, data ,toggleModal}) => {
     const {
       getTableProps,
       getTableBodyProps,
@@ -128,6 +157,10 @@ const Table = ({ columns, data }) => {
       { columns, data },
       useResizeColumns // Sử dụng plugin useResizeColumns
     );
+
+    const handleRowDoubleClick = rowData => {
+      toggleModal(rowData); 
+    };
   
     return (
       <div className='table-container'>
@@ -145,7 +178,7 @@ const Table = ({ columns, data }) => {
               {rows.map(row => {
                 prepareRow(row);
                 return (
-                  <tr {...row.getRowProps()}>
+                  <tr {...row.getRowProps()} onDoubleClick={() => handleRowDoubleClick(row.original)}>
                     {row.cells.map(cell => (
                       <td 
                         {...cell.getCellProps()}>{cell.render('Cell')}

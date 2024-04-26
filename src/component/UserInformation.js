@@ -3,8 +3,10 @@ import App from '../App';
 import InformationTable from '../publicComponent/InformationTable';
 import { Button } from 'react-bootstrap';
 import CardBorder from '../publicComponent/CardBorder';
+import Modal from '../publicComponent/modal/Modal';
 
 class UserInformation extends Component {
+  
     render() {
         return (
           <div>
@@ -15,6 +17,7 @@ class UserInformation extends Component {
               bodyTable = {
               <InformationTable 
                   title="User Accounts Table"
+                  changeTitle="User Account Information" 
                   // container = {<UserTable/>}
                   btnSearchID = "btn-search-user"
                   SearchbarLavel = "Search for user"
@@ -24,6 +27,7 @@ class UserInformation extends Component {
                       
               </InformationTable>}>
             </App> 
+            
           </div>
             
         );
