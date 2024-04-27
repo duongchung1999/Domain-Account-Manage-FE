@@ -17,7 +17,8 @@ class InformationTable extends Component {
         this.state = {
             searchTerm: '',
             showModal: false,
-            rowData: null
+            rowData: null,
+            showUpdate: true
         };
     }
 
@@ -54,10 +55,8 @@ class InformationTable extends Component {
                                 className={`btn-show-modal ${this.props.btnAdd}`} 
                                 style={{ marginLeft: '20px' }}
                                 onClick={this.toggleModal} >
-                                  Show modal
+                                  Add
                                 </Button>
-                                <Button variant="info" style={{ marginLeft: '10px' }}>Config</Button>
-                                <Button variant="danger" style={{ marginLeft: '10px' }}>Remove</Button>
                                 </div>
                                 <Searchbar 
                                 btnID = {this.props.SearchbarId} 

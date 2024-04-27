@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './Login.css';
 import DisplayThemeButtons from './LoginScript';
 import { Navigate  } from 'react-router-dom';
+import Modal from '../../publicComponent/modal/Modal';
+
 const apiUrl = process.env.REACT_APP_API_URL;
 class Login extends Component {
     state = { user: null, error: null };
@@ -13,7 +15,7 @@ class Login extends Component {
         console.log(username);
         const requestBody = {
             email: username,
-            password: password
+            password: password,
         };
 
         try {
@@ -26,14 +28,17 @@ class Login extends Component {
             });
             const responseData = await response.json(); // Giải mã JSON từ phản hồi
                 // console.log(responseData.message);
-                // console.log(responseData.token);
+                console.log(responseData.token);
                 let user = responseData.flag;
                 
                 
                 if (response.ok) {
                     let user = responseData.flag;
                     if (user) {
+                        localStorage.setItem('token', responseData.token);
                         this.setState({ user });
+                        // this.setState({ jsonData: responseData.data });
+
                     } else {
                         let error = {
                             message: responseData.message || 'Login failed due to unknown error'
@@ -87,6 +92,7 @@ class Login extends Component {
             </div>
             <div className="theme-btn-container" />
             <DisplayThemeButtons />
+            
         </section>
         );
     }

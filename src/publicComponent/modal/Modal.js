@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './modal.css';
 import context from 'react-bootstrap/esm/AccordionContext';
+import { NavLink } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import axios from 'axios';
 class Modal extends Component {
   constructor(props) {
       super(props);
@@ -11,10 +14,10 @@ class Modal extends Component {
   }
   componentDidUpdate(prevProps) {
     if (!prevProps.showModal && this.props.showModal) {
-      this.setState({ isModalOpen: true });
+      this.setState({ isModalOpen: true,
+         });
     }
-  }
-  
+  } 
   
 
   handleFormItemChange = (accessor, value) => {
@@ -26,8 +29,48 @@ class Modal extends Component {
       }));
   };
   handleCloseModal = () => {
-    this.setState({ isModalOpen: false }); 
+    this.setState({ isModalOpen: false ,
+      }); 
     this.props.toggleModal(); 
+  };
+
+
+
+  // Add Item:
+  handleAddItem = async () => {
+    const { formData } = this.state;
+    const requestBody = {};
+    const token = localStorage.getItem('token');
+    
+    // Tạo requestBody từ formData
+    Object.keys(formData).forEach(key => {
+      requestBody[key] = formData[key];
+    });
+    try {
+      const response = await fetch('http://10.53.160.160:5080/api/Computer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const responseData = await response.json();
+      console.log(responseData);
+
+      if (response.status === 201) {
+        alert("Add Success!");
+        this.handleCloseModal();
+      } else {
+        // Xử lý trường hợp khác (nếu cần)
+      }
+  
+      // Xử lý kết quả của API tại đây (response)
+    } catch (error) {
+      // Xử lý lỗi nếu có
+      console.error('Error adding item:', error);
+    }
   };
   
     render() {
@@ -37,7 +80,7 @@ class Modal extends Component {
             <div className={`modal js-modal ${showModal || isModalOpen ? '' : 'hidden'}`}>
               <div className="container1 js-modal-container">
                 <div className="modal-close js-modal-close" 
-                onClick={this.handleCloseModal}>
+                  onClick={this.handleCloseModal}>
                   <i class="fa-solid fa-circle-xmark"></i>
                 </div>
                 <header className="modal-header">
@@ -45,46 +88,53 @@ class Modal extends Component {
                   {this.props.title}
                 </header>
                 <div className="modal-body">
-                <div className='row'>
-                  <div className='col-7'>
-                    {columns.map(column => (
-                      column.Header !== 'No' && 
-                      <ItemChange 
-                      defaultValue={this.props.defaultValue} 
-                      itemName={column.Header} 
-                      itemAccesor={column.accessor}
-                      onFormItemChange={this.handleFormItemChange}/>
-                    ))}
-                  </div>
-                  <div className='col-5'>
-                  <div className="card border-primary ">
-                    <div className="card-body">
-                      <h4 className="card-title">New {this.props.title} </h4>
-                      {columns.map(column => (
-                      column.Header !== 'No' && 
-                      <ViewItem key={column.accessor}
-                      itemName={column.accessor}
-                      itemValue={formData[column.accessor]} 
-                      defaultValue={this.props.defaultValue} />
-                    ))}
+                  <div className='row'>
+                    <div className='col-7'>
+                        {columns.map(column => (
+                          column.Header !== 'No' && 
+                          <ItemChange 
+                          defaultValue={this.props.defaultValue} 
+                          itemName={column.Header} 
+                          itemAccesor={column.accessor}
+                          isModalOpen={isModalOpen}
+                          onFormItemChange={this.handleFormItemChange}
+                          />
+                        ))}
+                    </div>
+                    <div className='col-5'>
+                      <div className="card border-primary ">
+                        <div className="card-body">
+                          <h4 className="card-title">New {this.props.title} </h4>
+                          {columns.map(column => (
+                          column.Header !== 'No' && 
+                          <ViewItem key={column.accessor}
+                          itemName={column.accessor}
+                          itemValue={formData[column.accessor]} 
+                          defaultValue={this.props.defaultValue} />
+                        ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  
-
-                  </div>
-                </div>
-                
-                  
-                  
-                  
-                  <button className="buy-tickets">
-                    PAY <i className="ti-check" />
-                  </button>
                 </div>
                 <footer className="modal-footer">
                   <p className="modal-help">
-                    Need <a href="">help?</a>
+                  <Button 
+                  variant="info" 
+                  style={{ marginLeft: '10px' }}
+                  onClick={this.handleAddItem}
+                  >Add</Button>
+
+                  <Button 
+                  variant="warning" 
+                  style={{ marginLeft: '10px' }}
+                  >Update</Button>
+
+                  <Button 
+                  variant="danger" 
+                  style={{ marginLeft: '10px' }}
+                  >Remove</Button>
+
                   </p>
                 </footer>
               </div>
@@ -96,10 +146,31 @@ class Modal extends Component {
 export default Modal;
 
 class ItemChange extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inputValue: (this.props.defaultValue && this.props.defaultValue[this.props.itemAccesor]) || ''
+    };
+  }
+  
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isModalOpen !== this.props.isModalOpen) {
+      const defaultValue = this.props.defaultValue || {}; // Kiểm tra xem this.props.defaultValue có tồn tại không
+      // console.log(defaultValue);
+      this.setState({
+        inputValue: defaultValue[this.props.itemAccesor] || ''
+        
+      });
+      const { itemAccesor,onFormItemChange } = this.props;
+      onFormItemChange(itemAccesor, this.state.inputValue||this.props.defaultValue[itemAccesor]);
+    }
+  }
+  
   handleInputChange = event => {
       const { itemAccesor, onFormItemChange } = this.props;
       const value = event.target.value;
-      
+      this.setState({ inputValue: value });
       // Gọi hàm để cập nhật state của Modal
       onFormItemChange(itemAccesor, value);
   };
@@ -107,7 +178,6 @@ class ItemChange extends Component {
   render() {
     const { defaultValue, itemAccesor } = this.props;
     const itemValue = defaultValue && defaultValue[itemAccesor]; 
-    // console.log(itemValue);
     return (
       <div>
         <div className='row item-change'>
@@ -120,7 +190,9 @@ class ItemChange extends Component {
             type="text"
             className="modal-input col-10"
             placeholder={"  Type New " + this.props.itemName + " in here..."}
-            defaultValue={itemValue } 
+            defaultValue={itemValue }   
+            // defaultValue={this.state.inputValue }   
+            value={this.state.inputValue}
             onChange={this.handleInputChange}
           />
         </div>
@@ -136,7 +208,11 @@ class ViewItem extends Component{
     const itemValue = defaultValue && defaultValue[itemName]; 
     return(
       <div>
-        {this.props.itemName}: {this.props.itemValue?this.props.itemValue:itemValue}
+        <div className='row'>
+          <div className='col-5 no-padding'>{this.props.itemName}:</div>
+          <div className='col-7 no-padding'>{this.props.itemValue?this.props.itemValue:itemValue}</div>
+        </div>
+         
       </div>
     );
   }
