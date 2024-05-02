@@ -1,15 +1,48 @@
 import React, { Component } from 'react';
-import './NavHeader.css'
+import './NavHeader.css';
+import { Navigate, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 class NavHeader extends Component {
+    state = {
+        isDropdownOpen: false ,
+        logout: false
+    };
+    
+
+    toggleDropdown = () => {
+        this.setState(prevState => ({ isDropdownOpen: !prevState.isDropdownOpen }));
+    };
     toggleMenuSideVisibility = () => {
-        // Gửi trạng thái hiện tại của MenuSide lên component cha
         this.props.toggleMenuSide();
+    }
+    loginFunction = () => {
+        this.setState({
+            logout:true
+        });
+    }
+    LogoutFunction = () =>{
+        localStorage.removeItem("token");
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Logout Success",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        // const navigate = useNavigate(); 
+        // this.props.history.push("/login");
+        this.setState({
+            logout:true
+        });
     }
 
     render() {
+        const { isDropdownOpen,logout } = this.state;
+        
         return (
+            
             <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-                {/* Navbar Brand*/}
+               {logout&&(<Navigate to="/login" replace={true}></Navigate>)}
                 <a className="navbar-brand header-logo" href="#!">
                 {/* <i class="fa-solid fa-tower-broadcast"></i> */}
                 <span className="ml-2 header-logo-span"><img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="" className="img-fluid header-logo-img" /></span>
@@ -40,12 +73,13 @@ class NavHeader extends Component {
                         href="#"
                         role="button"
                         data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                        onClick={this.toggleDropdown} // Gọi hàm toggleDropdown khi click
+                        aria-expanded={isDropdownOpen ? "true" : "false"} // Đặt aria-expanded tương ứng với trạng thái của dropdown
                     >
                         <i className="fas fa-user fa-fw" />
                     </a>
                     <ul
-                        className="dropdown-menu dropdown-menu-end"
+                        className={`dropdown-menu ${isDropdownOpen ? 'dropdown-menu-end show' : ''}`} 
                         aria-labelledby="navbarDropdown"
                     >
                         <li>
@@ -54,16 +88,17 @@ class NavHeader extends Component {
                         </a>
                         </li>
                         <li>
-                        <a className="dropdown-item" href="#!">
-                            Activity Log
+                        <a className="dropdown-item" onClick={this.loginFunction}>
+                            Login
                         </a>
                         </li>
                         <li>
                         <hr className="dropdown-divider" />
                         </li>
                         <li>
-                        <a className="dropdown-item" href="#!">
-                            Logout
+                        <a className="dropdown-item" onClick={this.LogoutFunction}>
+                            Logout 
+                            
                         </a>
                         </li>
                     </ul>

@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 // import Table from './Table';
 import { useTable, useResizeColumns } from 'react-table';
 import Modal from './modal/Modal';
+import { Navigate } from 'react-router-dom';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 const apiPage = axios.create({
@@ -19,8 +20,15 @@ class InformationTable extends Component {
             showModal: false,
             rowData: null,
             showUpdate: true,
-            changeData:false
+            changeData:false,
+            user:false
         };
+    }
+    componentDidMount(){
+      let token = localStorage.getItem("token");
+      if (token) {
+          this.setState({ user: true });
+      }
     }
 
     handleSearchbarValue = (value) => {
@@ -61,10 +69,11 @@ class InformationTable extends Component {
   }
 
     render() {
-      const { showModal,rowData  } = this.state;
+      const { showModal,rowData,user  } = this.state;
         return (
             <div>
                 <div className="card border-primary">
+                {user && (<Navigate to="/home" replace={true} />)}
                     <div className="card-body">
                         <h4 className="card-title">
                             <div className='me-md-2 navbar'>

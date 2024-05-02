@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import './Login.css';
 import DisplayThemeButtons from './LoginScript';
 import { Navigate  } from 'react-router-dom';
@@ -9,6 +9,13 @@ import Swal from 'sweetalert2';
 const apiUrl = process.env.REACT_APP_API_URL;
 class Login extends Component {
     state = { user: null, error: null };
+    componentDidMount() {
+        let token = localStorage.getItem("token");
+        if (token) {
+            this.setState({ user: true });
+        }
+    }
+    
     handleSubmit = async (event) => {
         event.preventDefault(); 
         const formData = new FormData(event.target);

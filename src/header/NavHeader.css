@@ -48,3 +48,6 @@
     height: 100%;
     padding: auto;
 }
+.dropdown-menu{
+    margin-left: -100px;
+}
