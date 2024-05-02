@@ -4,6 +4,7 @@ import context from 'react-bootstrap/esm/AccordionContext';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+const apiUrl = process.env.REACT_APP_API_URL;
 class Modal extends Component {
   constructor(props) {
       super(props);
@@ -34,6 +35,7 @@ class Modal extends Component {
     this.setState({ isModalOpen: false ,
       }); 
     this.props.toggleModal(); 
+    
   };
 
 
@@ -48,7 +50,7 @@ class Modal extends Component {
       requestBody[key] = formData[key];
     });
     try {
-      const response = await fetch('http://10.53.160.160:5080/api/Computer', {
+      const response = await fetch(apiUrl+ this.props.api , {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,6 +65,7 @@ class Modal extends Component {
       if (response.status === 201) {
         alert("Add Success!");
         this.handleCloseModal();
+        this.props.toggleChangeData(); 
       } else {
         // Xử lý trường hợp khác (nếu cần)
       }
@@ -72,12 +75,45 @@ class Modal extends Component {
     }
   };
 
+  handleUpdateItem = async () => {
+    const { formData } = this.state;
+    const requestBody = {};
+    const token = localStorage.getItem('token');
+    
+    Object.keys(formData).forEach(key => {
+      requestBody[key] = formData[key];
+    });
+    requestBody["id"]= this.props.defaultValue["id"];
+    try {
+      const response = await fetch(apiUrl+ this.props.api , {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.status === 204) {
+        alert("Update Success!");
+        this.handleCloseModal();
+        this.props.toggleChangeData(); 
+      } else {
+        // Xử lý trường hợp khác (nếu cần)
+      }
+  
+    } catch (error) {
+      console.error('Error adding item:', error);
+    }
+  };
+
+
   deleteItem = async () => {
     const { formData } = this.state;
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://10.53.160.160:5080/api/Computer/${this.props.defaultValue["id"]}`, {
+      const response = await fetch(`${apiUrl}${this.props.api}/${this.props.defaultValue["id"]}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -88,6 +124,7 @@ class Modal extends Component {
       if (response.status === 204) {
         alert("DELETE Success!");
         this.handleCloseModal();
+        this.props.toggleChangeData(); 
       } else {
         // Xử lý trường hợp không thành công ở đây
       }
@@ -152,6 +189,7 @@ class Modal extends Component {
                   <Button 
                   variant="warning" 
                   style={{ marginLeft: '10px' }}
+                  onClick={this.handleUpdateItem}
                   
                   >Update</Button>
 

@@ -10,6 +10,7 @@ import axios from 'axios';
 import PrinterInfor from './component/printer/PrinterInfor';
 import Computer from './component/computer/Computer';
 import Document from './component/document/Document';
+import Register from './component/register/Register';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/printer",

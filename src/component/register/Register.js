@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
-import './Login.css';
-import DisplayThemeButtons from './LoginScript';
+import '../login/Login.css';
+import DisplayThemeButtons from '../login/LoginScript';
 import { Navigate  } from 'react-router-dom';
 import Modal from '../../publicComponent/modal/Modal';
 import { NavLink } from 'react-router-dom';
 
 const apiUrl = process.env.REACT_APP_API_URL;
-class Login extends Component {
+class Register extends Component {
     state = { user: null, error: null };
     handleSubmit = async (event) => {
         event.preventDefault(); 
         const formData = new FormData(event.target);
+        const name = formData.get('name');
         const username = formData.get('username');
         const password = formData.get('password');
+        const confirmPassword = formData.get('confirmPassword');
         console.log(username);
         const requestBody = {
+            name: name,
             email: username,
             password: password,
+            confirmPassword: confirmPassword,
         };
 
         try {
-            const response = await fetch(apiUrl+'/api/Account/login', {
+            const response = await fetch(apiUrl+'/api/Account/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -36,7 +40,7 @@ class Login extends Component {
                 if (response.ok) {
                     let user = responseData.flag;
                     if (user) {
-                        localStorage.setItem('token', responseData.token);
+                        // localStorage.setItem('token', responseData.token);
                         this.setState({ user });
                         // this.setState({ jsonData: responseData.data });
 
@@ -68,7 +72,7 @@ class Login extends Component {
             <div className="login-container">
             {error && <p>{error.message}</p>}
             {user && (
-          <Navigate to="/home" replace={true} />
+          <Navigate to="/login" replace={true} />
         )}
             <img src="https://www.foxlink.com/web/en/wp-content/uploads/2017/02/wlogo_foxlink_b.png" alt="" className="img-fluid header-logo-img" />
                 <div className="circle circle-one" />
@@ -78,16 +82,16 @@ class Login extends Component {
                         alt="illustration"
                         className="illustration"
                     />
-                    <h1 className="opacity">LOGIN</h1>
+                    <h1 className="opacity">REGISTER</h1>
                     <form onSubmit={this.handleSubmit}>
+                        <input type="text" name="name" placeholder="NAME" />
                         <input type="text" name="username" placeholder="USER ID" />
                         <input type="password" name="password" placeholder="PASSWORD" />
-                        <button type="submit" className="opacity">SUBMIT</button>
+                        <input type="password" name="confirmPassword" placeholder="CONFIRM PASSWORD" />
+                        <button type="submit" className="opacity">REGISTER</button>
                     </form>
                     <div className="register-forget opacity">
-                        {/* <a href="">REGISTER</a> */}
-                        <NavLink to="/register">REGISTER</NavLink>
-                        <a href="">FORGOT PASSWORD</a>
+                        <NavLink to="/login">LOGIN</NavLink>
                     </div>
                 </div>
                 <div className="circle circle-two" />
@@ -100,4 +104,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Register;
