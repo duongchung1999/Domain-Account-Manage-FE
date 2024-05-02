@@ -100,6 +100,7 @@ class DataTable extends Component {
     componentDidMount() {
       this.fetchData();
     }
+    
   
     fetchData = async () => {
       try {

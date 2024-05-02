@@ -17,6 +17,7 @@ class Modal extends Component {
       this.setState({ isModalOpen: true,
          });
     }
+   
   } 
   
 
@@ -27,6 +28,7 @@ class Modal extends Component {
               [accessor]: value 
           }
       }));
+     
   };
   handleCloseModal = () => {
     this.setState({ isModalOpen: false ,
@@ -42,7 +44,6 @@ class Modal extends Component {
     const requestBody = {};
     const token = localStorage.getItem('token');
     
-    // Tạo requestBody từ formData
     Object.keys(formData).forEach(key => {
       requestBody[key] = formData[key];
     });
@@ -57,7 +58,7 @@ class Modal extends Component {
       });
 
       const responseData = await response.json();
-      console.log(responseData);
+      // console.log(responseData);
 
       if (response.status === 201) {
         alert("Add Success!");
@@ -73,40 +74,26 @@ class Modal extends Component {
 
   deleteItem = async () => {
     const { formData } = this.state;
-    const requestBody = {};
     const token = localStorage.getItem('token');
     
-    Object.keys(formData).forEach(key => {
-      requestBody[key] = formData[key];
-      // if(key == "id"){
-      //   requestBody[key] = formData[key];
-      // }
-    });
-    console.log("formData"+formData);
-    // requestBody["id"] =  formData["id"];
-    console.log(requestBody);
     try {
-      const response = await fetch('http://10.53.160.160:5080/api/Computer', {
+      const response = await fetch(`http://10.53.160.160:5080/api/Computer/${this.props.defaultValue["id"]}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`, 
-        },
-        body: JSON.stringify(requestBody),
+        }
       });
-
-      const responseData = await response.json();
-      console.log(responseData);
-
-      if (response.status === 201) {
+  
+      if (response.status === 204) {
         alert("DELETE Success!");
         this.handleCloseModal();
       } else {
-        // Xử lý trường hợp khác (nếu cần)
+        // Xử lý trường hợp không thành công ở đây
       }
   
     } catch (error) {
-      console.error('Error adding item:', error);
+      console.error('Error deleting item:', error);
     }
   };
   
@@ -165,6 +152,7 @@ class Modal extends Component {
                   <Button 
                   variant="warning" 
                   style={{ marginLeft: '10px' }}
+                  
                   >Update</Button>
 
                   <Button 
@@ -195,12 +183,19 @@ class ItemChange extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.isModalOpen !== this.props.isModalOpen) {
       const defaultValue = this.props.defaultValue || {}; // Kiểm tra xem this.props.defaultValue có tồn tại không
+      // console.log(defaultValue);
       this.setState({
         inputValue: defaultValue[this.props.itemAccesor] || ''
         
       });
       const { itemAccesor,onFormItemChange } = this.props;
-      onFormItemChange(itemAccesor, this.state.inputValue||this.props.defaultValue[itemAccesor]);
+      try{
+        onFormItemChange(itemAccesor, this.state.inputValue||this.props.defaultValue[itemAccesor]);
+      }
+      catch{
+        onFormItemChange(itemAccesor, "");
+      }
+     
     }
   }
   
