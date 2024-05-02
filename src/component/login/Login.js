@@ -4,6 +4,7 @@ import DisplayThemeButtons from './LoginScript';
 import { Navigate  } from 'react-router-dom';
 import Modal from '../../publicComponent/modal/Modal';
 import { NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 class Login extends Component {
@@ -13,7 +14,6 @@ class Login extends Component {
         const formData = new FormData(event.target);
         const username = formData.get('username');
         const password = formData.get('password');
-        console.log(username);
         const requestBody = {
             email: username,
             password: password,
@@ -28,15 +28,23 @@ class Login extends Component {
                 body: JSON.stringify(requestBody),
             });
             const responseData = await response.json(); // Giải mã JSON từ phản hồi
-                // console.log(responseData.message);
-                console.log(responseData.token);
+                // console.log(responseData.errors.Email[0]);
+                // console.log(responseData.token);
                 let user = responseData.flag;
                 
                 
                 if (response.ok) {
+                    console.log(123);
                     let user = responseData.flag;
                     if (user) {
                         localStorage.setItem('token', responseData.token);
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: "Login Success",
+                            showConfirmButton: false,
+                            timer: 1500
+                          });
                         this.setState({ user });
                         // this.setState({ jsonData: responseData.data });
 
@@ -44,12 +52,27 @@ class Login extends Component {
                         let error = {
                             message: responseData.message || 'Login failed due to unknown error'
                         };
+                        console.log(responseData.errors);
+                        Swal.fire({
+                            position: "center",
+                            icon: "info",
+                            title: error.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                          });
                         this.setState({ error });
                     }
                 } else {
                     let error = {
                         message: responseData.errors && responseData.errors.Email ? responseData.errors.Email : 'Login failed due to unknown error'
                     };
+                    Swal.fire({
+                        position: "center",
+                        icon: "info",
+                        title: error.message[0],
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
                     this.setState({ error });
                 }
             } catch (error) {
@@ -57,6 +80,13 @@ class Login extends Component {
                 let errorMessage = {
                     message: 'Error logging in: ' + error.message
                 };
+                Swal.fire({
+                    position: "center",
+                    icon: "info",
+                    title: error.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
                 this.setState({ error: errorMessage });
             }
     };

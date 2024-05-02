@@ -4,7 +4,10 @@ import context from 'react-bootstrap/esm/AccordionContext';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+
 const apiUrl = process.env.REACT_APP_API_URL;
+
 class Modal extends Component {
   constructor(props) {
       super(props);
@@ -63,15 +66,36 @@ class Modal extends Component {
       // console.log(responseData);
 
       if (response.status === 201) {
-        alert("Add Success!");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Add Success",
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.handleCloseModal();
         this.props.toggleChangeData(); 
       } else {
-        // Xử lý trường hợp khác (nếu cần)
+        Swal.fire({
+          position: "center",
+          icon: "info",
+          title: "Nothing to add",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.handleCloseModal();
       }
   
     } catch (error) {
       console.error('Error adding item:', error);
+      Swal.fire({
+        position: "center",
+        icon: "info",
+        title: "Add Fail",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      this.handleCloseModal();
     }
   };
 
@@ -84,54 +108,102 @@ class Modal extends Component {
       requestBody[key] = formData[key];
     });
     requestBody["id"]= this.props.defaultValue["id"];
-    try {
-      const response = await fetch(apiUrl+ this.props.api , {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, 
-        },
-        body: JSON.stringify(requestBody),
-      });
+    Swal.fire({
+      title: "Do you want to update the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Update",
+      denyButtonText: `Don't update`
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(apiUrl+ this.props.api , {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`, 
+            },
+            body: JSON.stringify(requestBody),
+          });
+    
+          if (response.status === 204) {
+            // alert("Update Success!");
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Updated Success",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.handleCloseModal();
+            this.props.toggleChangeData(); 
+          } else {
 
-      if (response.status === 204) {
-        alert("Update Success!");
+          }
+      
+        } catch (error) {
+          console.error('Error adding item:', error);
+          Swal.fire(error, "", "info");
+          this.handleCloseModal();
+        }
+       
+      } else if (result.isDenied) {
+        Swal.fire({
+          position: "center",
+          icon: "info",
+          title: "Changes are not saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.handleCloseModal();
-        this.props.toggleChangeData(); 
-      } else {
-        // Xử lý trường hợp khác (nếu cần)
       }
-  
-    } catch (error) {
-      console.error('Error adding item:', error);
-    }
+    });
+
+   
   };
 
 
   deleteItem = async () => {
     const { formData } = this.state;
     const token = localStorage.getItem('token');
-    
-    try {
-      const response = await fetch(`${apiUrl}${this.props.api}/${this.props.defaultValue["id"]}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, 
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await fetch(`${apiUrl}${this.props.api}/${this.props.defaultValue["id"]}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`, 
+            }
+          });
+      
+          if (response.status === 204) {
+            this.handleCloseModal();
+            this.props.toggleChangeData(); 
+          } else {
+            // Xử lý trường hợp không thành công ở đây
+          }
+      
+        } catch (error) {
+          console.error('Error deleting item:', error);
         }
-      });
-  
-      if (response.status === 204) {
-        alert("DELETE Success!");
-        this.handleCloseModal();
-        this.props.toggleChangeData(); 
-      } else {
-        // Xử lý trường hợp không thành công ở đây
+        Swal.fire({
+          title: "Deleted!",
+          text: "This information has been deleted.",
+          icon: "success"
+        });
       }
-  
-    } catch (error) {
-      console.error('Error deleting item:', error);
-    }
+    });
+    
+    
   };
   
     render() {
