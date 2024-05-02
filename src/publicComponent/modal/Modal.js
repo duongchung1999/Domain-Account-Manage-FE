@@ -186,20 +186,36 @@ class Modal extends Component {
           });
       
           if (response.status === 204) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "This information has been deleted.",
+              icon: "success"
+            });
             this.handleCloseModal();
             this.props.toggleChangeData(); 
           } else {
-            // Xử lý trường hợp không thành công ở đây
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "Something went wrong!",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.handleCloseModal();
           }
       
         } catch (error) {
           console.error('Error deleting item:', error);
+          Swal.fire({
+            position: "center",
+            icon: "info",
+            title: "Something went wrong!",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.handleCloseModal();
         }
-        Swal.fire({
-          title: "Deleted!",
-          text: "This information has been deleted.",
-          icon: "success"
-        });
+       
       }
     });
     
