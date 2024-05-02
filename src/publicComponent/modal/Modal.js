@@ -66,9 +66,46 @@ class Modal extends Component {
         // Xử lý trường hợp khác (nếu cần)
       }
   
-      // Xử lý kết quả của API tại đây (response)
     } catch (error) {
-      // Xử lý lỗi nếu có
+      console.error('Error adding item:', error);
+    }
+  };
+
+  deleteItem = async () => {
+    const { formData } = this.state;
+    const requestBody = {};
+    const token = localStorage.getItem('token');
+    
+    Object.keys(formData).forEach(key => {
+      requestBody[key] = formData[key];
+      // if(key == "id"){
+      //   requestBody[key] = formData[key];
+      // }
+    });
+    console.log("formData"+formData);
+    // requestBody["id"] =  formData["id"];
+    console.log(requestBody);
+    try {
+      const response = await fetch('http://10.53.160.160:5080/api/Computer', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const responseData = await response.json();
+      console.log(responseData);
+
+      if (response.status === 201) {
+        alert("DELETE Success!");
+        this.handleCloseModal();
+      } else {
+        // Xử lý trường hợp khác (nếu cần)
+      }
+  
+    } catch (error) {
       console.error('Error adding item:', error);
     }
   };
@@ -133,6 +170,7 @@ class Modal extends Component {
                   <Button 
                   variant="danger" 
                   style={{ marginLeft: '10px' }}
+                  onClick={this.deleteItem}
                   >Remove</Button>
 
                   </p>
@@ -157,7 +195,6 @@ class ItemChange extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.isModalOpen !== this.props.isModalOpen) {
       const defaultValue = this.props.defaultValue || {}; // Kiểm tra xem this.props.defaultValue có tồn tại không
-      // console.log(defaultValue);
       this.setState({
         inputValue: defaultValue[this.props.itemAccesor] || ''
         
