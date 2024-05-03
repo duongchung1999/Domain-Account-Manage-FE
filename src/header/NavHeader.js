@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './NavHeader.css';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { NavLink, Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 class NavHeader extends Component {
     state = {
         isDropdownOpen: false ,
-        logout: false
+        logout: false,
+        // changePassword:false
     };
     
 
@@ -83,9 +84,7 @@ class NavHeader extends Component {
                         aria-labelledby="navbarDropdown"
                     >
                         <li>
-                        <a className="dropdown-item" href="#!">
-                            Settings
-                        </a>
+                        <NavLink to="/changePassword" className="dropdown-item">Change Password</NavLink>
                         </li>
                         <li>
                         <a className="dropdown-item" onClick={this.loginFunction}>

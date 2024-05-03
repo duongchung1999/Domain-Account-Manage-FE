@@ -11,6 +11,7 @@ import PrinterInfor from './component/printer/PrinterInfor';
 import Computer from './component/computer/Computer';
 import Document from './component/document/Document';
 import Register from './component/register/Register';
+import ChangePassword from './component/changePassword/ChangePassword';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/changePassword",
+    element: <ChangePassword />,
   },
   {
     path: "/printer",
