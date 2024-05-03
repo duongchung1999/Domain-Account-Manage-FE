@@ -44,6 +44,12 @@ class ChangePassword extends Component {
             this.setState({ user: false });
         }
     }
+    componentWillMount(){
+        let token = localStorage.getItem("token");
+        if (!token) {
+            this.setState({ user: true });
+        }
+    }
     
     
     handleSubmit = async (event) => {
