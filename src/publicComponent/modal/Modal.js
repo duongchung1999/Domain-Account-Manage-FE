@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './modal.css';
 import context from 'react-bootstrap/esm/AccordionContext';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -13,7 +13,8 @@ class Modal extends Component {
       super(props);
       this.state = {
           formData: {} ,
-          isModalOpen: false 
+          isModalOpen: false,
+          isLogin: false
       };
   }
   componentDidUpdate(prevProps) {
@@ -40,6 +41,13 @@ class Modal extends Component {
     this.props.toggleModal(); 
     
   };
+  gotoLogin = () => {
+    var token = localStorage.getItem("token");
+    if(token){
+      localStorage.deleteItem("token");
+    }
+    this.setState({ isLogin : true,});
+  }
 
 
 
@@ -62,7 +70,7 @@ class Modal extends Component {
         body: JSON.stringify(requestBody),
       });
 
-      const responseData = await response.json();
+      // const responseData = await response.json();
       // console.log(responseData);
 
       if (response.status === 201) {
@@ -83,18 +91,40 @@ class Modal extends Component {
           showConfirmButton: false,
           timer: 1500
         });
+        
         this.handleCloseModal();
       }
   
     } catch (error) {
       console.error('Error adding item:', error);
       Swal.fire({
-        position: "center",
-        icon: "info",
-        title: "Add Fail",
-        showConfirmButton: false,
-        timer: 1500
+        title: "You do not have permission to process it. Do you want to login?",
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Yes",
+        denyButtonText: `No`
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Login Page",
+            showConfirmButton: false,
+            timer: 1000
+          });
+          this.gotoLogin();
+        } else if (result.isDenied) {
+          Swal.fire({
+            position: "center",
+            icon: "info",
+            title: "If you want to process it, please login and try again!",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
       });
+      // Swal.fire("You do not have permission to process it. Please login again!", "", "info");
       this.handleCloseModal();
     }
   };
@@ -137,13 +167,47 @@ class Modal extends Component {
             });
             this.handleCloseModal();
             this.props.toggleChangeData(); 
-          } else {
-
+          }
+           else {
+            Swal.fire({
+              position: "center",
+              icon: "info",
+              title: "Something went wrong",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.handleCloseModal();
           }
       
         } catch (error) {
-          console.error('Error adding item:', error);
-          Swal.fire(error, "", "info");
+          console.error('Error updating item:', error);
+          Swal.fire({
+            title: "You do not have permission to process it. Do you want to login?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Yes",
+            denyButtonText: `No`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Login Page",
+                showConfirmButton: false,
+                timer: 1000
+              });
+              this.gotoLogin();
+            } else if (result.isDenied) {
+              Swal.fire({
+                position: "center",
+                icon: "info",
+                title: "If you want to process it, please login and try again!",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
+          });
           this.handleCloseModal();
         }
        
@@ -207,13 +271,35 @@ class Modal extends Component {
         } catch (error) {
           console.error('Error deleting item:', error);
           Swal.fire({
-            position: "center",
-            icon: "info",
-            title: "Something went wrong!",
-            showConfirmButton: false,
-            timer: 1500
+            title: "You do not have permission to process it. Do you want to login?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Yes",
+            denyButtonText: `No`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Login Page",
+                showConfirmButton: false,
+                timer: 1000
+              });
+              this.gotoLogin();
+            } else if (result.isDenied) {
+              Swal.fire({
+                position: "center",
+                icon: "info",
+                title: "If you want to process it, please login and try again!",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
           });
+          // Swal.fire("You do not have permission to process it. Please login again!", "", "info");
           this.handleCloseModal();
+          
         }
        
       }
@@ -224,9 +310,10 @@ class Modal extends Component {
   
     render() {
       const { columns, showModal, toggleModal } = this.props;
-      const { formData,isModalOpen  } = this.state;
+      const { formData,isModalOpen,isLogin } = this.state;
         return (
             <div className={`modal js-modal ${showModal || isModalOpen ? '' : 'hidden'}`}>
+              {isLogin && <Navigate to="/login" replace={true}/>}
               <div className="container1 js-modal-container">
                 <div className="modal-close js-modal-close" 
                   onClick={this.handleCloseModal}>

@@ -73,7 +73,7 @@ class InformationTable extends Component {
         return (
             <div>
                 <div className="card border-primary">
-                {user && (<Navigate to="/home" replace={true} />)}
+                {/* {user && (<Navigate to="/home" replace={true} />)} */}
                     <div className="card-body">
                         <h4 className="card-title">
                             <div className='me-md-2 navbar'>

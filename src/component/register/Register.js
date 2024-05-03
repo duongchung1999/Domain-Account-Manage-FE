@@ -8,7 +8,17 @@ import Swal from 'sweetalert2';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 class Register extends Component {
-    state = { user: null, error: null };
+    state = { user: null, error: null,showPassword:false,showConfirmPassword:false };
+    togglePasswordVisibility = () => {
+        this.setState(prevState => ({
+            showPassword: !prevState.showPassword
+        }));
+    };
+    toggleConfirmPasswordVisibility = () => {
+        this.setState(prevState => ({
+            showConfirmPassword: !prevState.showConfirmPassword
+        }));
+    };
     handleSubmit = async (event) => {
         event.preventDefault(); 
         const formData = new FormData(event.target);
@@ -73,7 +83,7 @@ class Register extends Component {
     };
 
     render() {
-        let { user, error } = this.state;
+        let { user, error,showPassword,showConfirmPassword } = this.state;
         return (
             <section className="container-show">
             <div className="login-container">
@@ -93,8 +103,39 @@ class Register extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <input type="text" name="name" placeholder="NAME" />
                         <input type="text" name="username" placeholder="USER ID" />
-                        <input type="password" name="password" placeholder="PASSWORD" />
-                        <input type="password" name="confirmPassword" placeholder="CONFIRM PASSWORD" />
+                        <div className='input-password'>
+                            <input 
+                            type={showPassword ? "text" : "password"}
+                            name="password" 
+                            placeholder="PASSWORD" 
+                            /> 
+                        
+                            <div className={showPassword ? "hide" : "positsionPassword"}
+                            onClick={this.togglePasswordVisibility}>
+                                <i className="fa-solid fa-eye"/>
+                            </div>
+                            <div className={showPassword ? "positsionPassword" : "hide"}
+                            onClick={this.togglePasswordVisibility}>
+                                <i className="fa-regular fa-eye-slash"/>
+                            </div>
+                        </div>
+
+                        <div className='input-password'>
+                            <input 
+                            type={showConfirmPassword ? "text" : "password"}
+                            name="confirmPassword" 
+                            placeholder="CONFIRM PASSWORD" 
+                            /> 
+                        
+                            <div className={showConfirmPassword ? "hide" : "positsionPassword"}
+                            onClick={this.toggleConfirmPasswordVisibility}>
+                                <i className="fa-solid fa-eye"/>
+                            </div>
+                            <div className={showConfirmPassword ? "positsionPassword" : "hide"}
+                            onClick={this.toggleConfirmPasswordVisibility}>
+                                <i className="fa-regular fa-eye-slash"/>
+                            </div>
+                        </div>
                         <button type="submit" className="opacity">REGISTER</button>
                     </form>
                     <div className="register-forget opacity">

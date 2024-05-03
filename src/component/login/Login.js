@@ -8,7 +8,16 @@ import Swal from 'sweetalert2';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 class Login extends Component {
-    state = { user: null, error: null };
+    state = { 
+        user: null, 
+        error: null, 
+        showPassword: false
+    };
+    togglePasswordVisibility = () => {
+        this.setState(prevState => ({
+            showPassword: !prevState.showPassword
+        }));
+    };
     componentDidMount() {
         let token = localStorage.getItem("token");
         if (token) {
@@ -41,7 +50,7 @@ class Login extends Component {
                 
                 
                 if (response.ok) {
-                    console.log(123);
+                    // console.log(123);
                     let user = responseData.flag;
                     if (user) {
                         localStorage.setItem('token', responseData.token);
@@ -59,7 +68,7 @@ class Login extends Component {
                         let error = {
                             message: responseData.message || 'Login failed due to unknown error'
                         };
-                        console.log(responseData.errors);
+                        // console.log(responseData.errors);
                         Swal.fire({
                             position: "center",
                             icon: "info",
@@ -71,19 +80,19 @@ class Login extends Component {
                     }
                 } else {
                     let error = {
-                        message: responseData.errors && responseData.errors.Email ? responseData.errors.Email : 'Login failed due to unknown error'
+                        message: responseData.errors && responseData.errors.Email ? responseData.errors.Email : responseData.errors.Password ?responseData.errors.Password :  'Login failed due to unknown error'
                     };
                     Swal.fire({
                         position: "center",
                         icon: "info",
-                        title: error.message[0],
+                        title: error.message,
                         showConfirmButton: false,
                         timer: 1500
                       });
                     this.setState({ error });
                 }
             } catch (error) {
-                console.error('Error logging in:', error);
+                // console.error('Error logging in:', error);
                 let errorMessage = {
                     message: 'Error logging in: ' + error.message
                 };
@@ -99,7 +108,7 @@ class Login extends Component {
     };
 
     render() {
-        let { user, error } = this.state;
+        let { user, error,showPassword } = this.state;
         return (
             <section className="container-show">
             <div className="login-container">
@@ -117,8 +126,27 @@ class Login extends Component {
                     />
                     <h1 className="opacity">LOGIN</h1>
                     <form onSubmit={this.handleSubmit}>
-                        <input type="text" name="username" placeholder="USER ID" />
-                        <input type="password" name="password" placeholder="PASSWORD" />
+                        <div>
+                            <input type="text" name="username" placeholder="USER ID" />
+                        </div>
+                        <div className='input-password'>
+                            <input 
+                            type={showPassword ? "text" : "password"}
+                            name="password" 
+                            placeholder="PASSWORD" 
+                            /> 
+                        
+                            <div className={showPassword ? "hide" : "positsionPassword"}
+                            onClick={this.togglePasswordVisibility}>
+                                <i className="fa-solid fa-eye"/>
+                            </div>
+                            <div className={showPassword ? "positsionPassword" : "hide"}
+                            onClick={this.togglePasswordVisibility}>
+                                <i className="fa-regular fa-eye-slash"/>
+                            </div>
+                        </div>
+                        
+                        
                         <button type="submit" className="opacity">SUBMIT</button>
                     </form>
                     <div className="register-forget opacity">
