@@ -23,6 +23,7 @@ background: #fff;
 position: relative;
 animation: modalFadeIn ease 0.5s;
 border-radius: 30px;
+overflow: hidden;
 }
 
 .modal-header {
@@ -45,12 +46,16 @@ border-radius: 30px;
     padding: 8px 10px;
     opacity: 0.8;
     font-size: 26px;
-    border-radius: 10px;
+    border-radius: 30px;
+    margin: 5px;
 }
-.modal-close:hover {
+.modal-close:hover{
     opacity: 1;
-    background: #ddd;
+    /* background: #b76464; */
+    font-size: 30px;
+    color: rgb(111, 0, 0);
 }
+
 
 .header-bag {
     padding-right: 15px;
