@@ -45,7 +45,7 @@ const columns = [
     },
     
     {
-      Header: 'User ID',
+      Header: 'ID',
       accessor: 'phoneUserId',
       width: '10%',
     },

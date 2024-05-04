@@ -40,7 +40,7 @@ const columns = [
       width: '30%',
     },
     {
-      Header: 'Ip Address',
+      Header: 'IP',
       accessor: 'cpuIp',
       width: '15%',
     },

@@ -202,7 +202,7 @@ const Table = ({ columns, data ,toggleModal}) => {
       prepareRow,
     } = useTable(
       { columns, data },
-      useResizeColumns // Sử dụng plugin useResizeColumns
+      useResizeColumns 
     );
 
     const handleRowDoubleClick = rowData => {
@@ -228,7 +228,24 @@ const Table = ({ columns, data ,toggleModal}) => {
                   <tr {...row.getRowProps()} onDoubleClick={() => handleRowDoubleClick(row.original)}>
                     {row.cells.map(cell => (
                       <td 
-                        {...cell.getCellProps()}>{cell.render('Cell')}
+                        {...cell.getCellProps()}>
+                        {cell.column.Header === 'IP' ?(
+                          <div className='view-connected'>
+                              <div className='row'>
+                                <div className='col-10'>
+                                  {cell.value}
+                                </div>
+
+                                <div className='col-2 circle-container'>
+                                  <div className='row'>
+                                    <div className="circle-view circle-blue"></div>
+                                    <div className="circle-view circle-red"></div>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                                )
+                                 : ( cell.render('Cell') )}
                       </td>
                     ))}
                   </tr>
