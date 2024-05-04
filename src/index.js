@@ -12,6 +12,7 @@ import Computer from './component/computer/Computer';
 import Document from './component/document/Document';
 import Register from './component/register/Register';
 import ChangePassword from './component/changePassword/ChangePassword';
+import PhoneInfor from './component/phone/PhoneInfor';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/document",
     element: <Document />,
+  },
+  {
+    path: "/phone",
+    element: <PhoneInfor />,
   },
 ]);
 

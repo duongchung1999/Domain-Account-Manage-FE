@@ -15,6 +15,7 @@ class MenuSide extends Component {
                             <NavItem path="/home" itemName="User Information" icon = {<i className="nav-icon fa-solid fa-users"></i>}/>
                             <NavItem path="/computer" itemName="Computer Information" icon = {<i className="nav-icon fa-solid fa-network-wired"></i>}/>
                             <NavItem path="/printer" itemName="Printer IP Address" icon = {<i className="nav-icon fa-solid fa-print"></i>}/>
+                            <NavItem path="/phone" itemName="Phone Numbers" icon = {<i class="nav-icon fa-solid fa-phone"></i>}/>
                             <NavItem path="/document" itemName="Documents" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
                             
                         </ul>

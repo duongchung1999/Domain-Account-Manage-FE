@@ -45,8 +45,8 @@ const columns = [
       width: '15%',
     },
     {
-      Header: 'Wifi MAC Address',
-      accessor: 'wifiMac',
+      Header: 'User Name',
+      accessor: 'cpuDescription',
       width: '30%',
     },
     {

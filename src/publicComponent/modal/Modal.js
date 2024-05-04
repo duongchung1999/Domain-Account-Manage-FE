@@ -84,35 +84,50 @@ class Modal extends Component {
         this.handleCloseModal();
         this.props.toggleChangeData(); 
       } else {
-        Swal.fire({
-          title: "You do not have permission to process it. Do you want to login?",
-          showDenyButton: true,
-          showCancelButton: false,
-          confirmButtonText: "Yes",
-          denyButtonText: `No`
-        }).then((result) => {
-          /* Read more about isConfirmed, isDenied below */
-          if (result.isConfirmed) {
+          var messageShow;
+          if(response.status === 401){
+            messageShow = "You do not have permission to process it. Do you want to login?"
             Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Login Page",
-              showConfirmButton: false,
-              timer: 1000
-            });
-            this.gotoLogin();
-          } else if (result.isDenied) {
-            Swal.fire({
-              position: "center",
-              icon: "info",
-              title: "If you want to process it, please login and try again!",
-              showConfirmButton: false,
-              timer: 1500
+              title: messageShow,
+              showDenyButton: true,
+              showCancelButton: false,
+              confirmButtonText: "Yes",
+              denyButtonText: `No`
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: "Login Page",
+                  showConfirmButton: false,
+                  timer: 1000
+                });
+                this.gotoLogin();
+              } else if (result.isDenied) {
+                Swal.fire({
+                  position: "center",
+                  icon: "info",
+                  title: "Please login and try again later!",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              }
             });
           }
-        });
-        // Swal.fire("You do not have permission to process it. Please login again!", "", "info");
-        this.handleCloseModal();
+          else{
+            messageShow = "Please checking validation of item again!";
+            Swal.fire({
+              title: messageShow,
+              showDenyButton: true,
+              showCancelButton: false,
+              confirmButtonText: "Yes",
+              denyButtonText: `No`
+            });   
+          }
+        
+          // Swal.fire("You do not have permission to process it. Please login again!", "", "info");
+          this.handleCloseModal();
       }
   
     } catch (error) {
@@ -189,34 +204,47 @@ class Modal extends Component {
             this.props.toggleChangeData(); 
           }
            else {
-            Swal.fire({
-              title: "You do not have permission to process it. Do you want to login?",
-              showDenyButton: true,
-              showCancelButton: false,
-              confirmButtonText: "Yes",
-              denyButtonText: `No`
-            }).then((result) => {
-              /* Read more about isConfirmed, isDenied below */
-              if (result.isConfirmed) {
+                var messageShow;
+              if(response.status === 401){
+                messageShow = "You do not have permission to process it. Do you want to login?"
                 Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "Login Page",
-                  showConfirmButton: false,
-                  timer: 1000
-                });
-                this.gotoLogin();
-              } else if (result.isDenied) {
-                Swal.fire({
-                  position: "center",
-                  icon: "info",
-                  title: "If you want to process it, please login and try again!",
-                  showConfirmButton: false,
-                  timer: 1500
+                  title: messageShow,
+                  showDenyButton: true,
+                  showCancelButton: false,
+                  confirmButtonText: "Yes",
+                  denyButtonText: `No`
+                }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                    Swal.fire({
+                      position: "center",
+                      icon: "success",
+                      title: "Login Page",
+                      showConfirmButton: false,
+                      timer: 1000
+                    });
+                    this.gotoLogin();
+                  } else if (result.isDenied) {
+                    Swal.fire({
+                      position: "center",
+                      icon: "info",
+                      title: "Please login and try again later!",
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                  }
                 });
               }
-            });
-            // Swal.fire("You do not have permission to process it. Please login again!", "", "info");
+              else{
+                messageShow = "Please checking validation of item again!";
+                Swal.fire({
+                  title: messageShow,
+                  showDenyButton: true,
+                  showCancelButton: false,
+                  confirmButtonText: "Yes",
+                  denyButtonText: `No`
+                });   
+              }
             this.handleCloseModal();
           }
       
@@ -299,34 +327,47 @@ class Modal extends Component {
             this.handleCloseModal();
             this.props.toggleChangeData(); 
           } else {
-            Swal.fire({
-              title: "You do not have permission to process it. Do you want to login?",
-              showDenyButton: true,
-              showCancelButton: false,
-              confirmButtonText: "Yes",
-              denyButtonText: `No`
-            }).then((result) => {
-              /* Read more about isConfirmed, isDenied below */
-              if (result.isConfirmed) {
+              var messageShow;
+              if(response.status === 401){
+                messageShow = "You do not have permission to process it. Do you want to login?"
                 Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: "Login Page",
-                  showConfirmButton: false,
-                  timer: 1000
-                });
-                this.gotoLogin();
-              } else if (result.isDenied) {
-                Swal.fire({
-                  position: "center",
-                  icon: "info",
-                  title: "If you want to process it, please login and try again!",
-                  showConfirmButton: false,
-                  timer: 1500
+                  title: messageShow,
+                  showDenyButton: true,
+                  showCancelButton: false,
+                  confirmButtonText: "Yes",
+                  denyButtonText: `No`
+                }).then((result) => {
+                  /* Read more about isConfirmed, isDenied below */
+                  if (result.isConfirmed) {
+                    Swal.fire({
+                      position: "center",
+                      icon: "success",
+                      title: "Login Page",
+                      showConfirmButton: false,
+                      timer: 1000
+                    });
+                    this.gotoLogin();
+                  } else if (result.isDenied) {
+                    Swal.fire({
+                      position: "center",
+                      icon: "info",
+                      title: "Please login and try again later!",
+                      showConfirmButton: false,
+                      timer: 1500
+                    });
+                  }
                 });
               }
-            });
-            // Swal.fire("You do not have permission to process it. Please login again!", "", "info");
+              else{
+                messageShow = "Please checking validation of item again!";
+                Swal.fire({
+                  title: messageShow,
+                  showDenyButton: true,
+                  showCancelButton: false,
+                  confirmButtonText: "Yes",
+                  denyButtonText: `No`
+                });   
+              }
             this.handleCloseModal();
           }
       
