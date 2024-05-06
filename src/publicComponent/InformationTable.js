@@ -56,8 +56,10 @@ class InformationTable extends Component {
     }
     fetchData = async () => {
       try {
-          const url = apiUrl + this.props.api;
-          console.log(url);
+          // const url = apiUrl + this.props.api;
+          // if(this.props.api.includes("Computer") || this.props.api.includes("Printers")){
+          //   await apiPage.get(this.props.api+"/UpdateIpStatus");
+          // }
           const response = await apiPage.get(this.props.api); 
           const responseData = response.data;
           const newData = responseData.map((item, index) => ({ ...item, number: index + 1 }));
@@ -177,6 +179,7 @@ class DataTable extends Component {
             });
         });
     }
+    
   
     render() {
       const columns = this.props.columns;
@@ -186,7 +189,11 @@ class DataTable extends Component {
   
       return (
         <div className="table-data-container">
-          <Table columns={columns} data={filteredData} toggleModal={this.props.toggleModal} />
+          <Table 
+          columns={columns} 
+          data={filteredData}
+          // rowData={this.props.rowData} 
+          toggleModal={this.props.toggleModal} />
         </div>
       );
     }
@@ -207,6 +214,7 @@ const Table = ({ columns, data ,toggleModal}) => {
 
     const handleRowDoubleClick = rowData => {
       toggleModal(rowData); 
+      // console.log(rowData);
     };
   
     return (
@@ -229,6 +237,7 @@ const Table = ({ columns, data ,toggleModal}) => {
                     {row.cells.map(cell => (
                       <td 
                         {...cell.getCellProps()}>
+                          {/* {console.log(cell.row.original.isConnect)} */}
                         {cell.column.Header === 'IP' ?(
                           <div className='view-connected'>
                               <div className='row'>
@@ -237,10 +246,20 @@ const Table = ({ columns, data ,toggleModal}) => {
                                 </div>
 
                                 <div className='col-2 circle-container'>
-                                  <div className='row'>
+                                  {cell.row.original.isConnect? 
+                                      (cell.row.original.isConnect === "true"?(
+                                        <div className="circle-view circle-blue"></div>
+                                     
+                                    ):(
+                                      <div className="circle-view circle-red"></div>
+                                    ))
+                                  :(
+                                    <div className="circle-view circle-red"></div>
+                                  )}
+                                  {/* <div className='row'>
                                     <div className="circle-view circle-blue"></div>
                                     <div className="circle-view circle-red"></div>
-                                  </div>
+                                  </div> */}
                                 </div>
                               </div>
                           </div>

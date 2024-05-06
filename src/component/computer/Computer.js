@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import App from '../../App';
 import InformationTable from '../../publicComponent/InformationTable';
+import axios from 'axios';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+const apiPage = axios.create({
+  baseURL: apiUrl,
+});
 class Computer extends Component {
     render() {
         return (
@@ -42,12 +47,12 @@ const columns = [
     {
       Header: 'IP',
       accessor: 'cpuIp',
-      width: '15%',
+      width: '30%',
     },
     {
       Header: 'User Name',
       accessor: 'cpuDescription',
-      width: '30%',
+      width: '15%',
     },
     {
         Header: 'Time Update',

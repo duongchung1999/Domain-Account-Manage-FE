@@ -34,7 +34,7 @@ const columns = [
       width: '5%',
     },
     {
-      Header: 'IP Address',
+      Header: 'IP',
       accessor: 'printerIp',
       width: '30%',
     },

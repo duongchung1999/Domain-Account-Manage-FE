@@ -89,6 +89,8 @@
   height: 10px;
   border-radius: 50%; 
   margin: 1px;
+  display: flex;
+  /* z-index: 1000; */
 }
 .circle-blue{
   background-color: blue; 
