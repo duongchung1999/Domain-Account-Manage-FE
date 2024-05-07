@@ -44,15 +44,16 @@ const columns = [
       accessor: 'cpuName',
       width: '30%',
     },
-    {
-      Header: 'IP',
-      accessor: 'cpuIp',
-      width: '30%',
-    },
+    
     {
       Header: 'User Name',
       accessor: 'cpuDescription',
       width: '15%',
+    },
+    {
+      Header: 'IP',
+      accessor: 'cpuIp',
+      width: '30%',
     },
     {
         Header: 'Time Update',

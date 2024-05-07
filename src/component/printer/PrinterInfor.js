@@ -33,11 +33,7 @@ const columns = [
       accessor: 'number',
       width: '5%',
     },
-    {
-      Header: 'IP',
-      accessor: 'printerIp',
-      width: '30%',
-    },
+    
     {
       Header: 'Position',
       accessor: 'department',
@@ -46,6 +42,16 @@ const columns = [
     {
       Header: 'Printer Name',
       accessor: 'printerName',
-      width: '10%',
+      width: '20%',
+    },
+    {
+      Header: 'IP',
+      accessor: 'printerIp',
+      width: '20%',
+    },
+    {
+      Header: 'Time Update',
+      accessor: 'timeUpdate',
+      width: '20%',
     },
   ];

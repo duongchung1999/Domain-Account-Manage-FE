@@ -241,17 +241,21 @@ const Table = ({ columns, data ,toggleModal}) => {
                         {cell.column.Header === 'IP' ?(
                           <div className='view-connected'>
                               <div className='row'>
-                                <div className='col-10'>
+                                <div className='col-8'>
                                   {cell.value}
                                 </div>
 
-                                <div className='col-2 circle-container'>
+                                <div className='col-4 circle-container'>
                                   {cell.row.original.isConnect? 
                                       (cell.row.original.isConnect === "true"?(
-                                        <div className="circle-view circle-blue"></div>
+                                        <div className="circle-view circle-blue">
+                                          <div className='circle-status circle-status-on'>online</div>
+                                        </div>
                                      
                                     ):(
-                                      <div className="circle-view circle-red"></div>
+                                      <div className="circle-view circle-red">
+                                        <div className='circle-status circle-status-off'>offline</div>
+                                      </div>
                                     ))
                                   :(
                                     <div className="circle-view circle-red"></div>

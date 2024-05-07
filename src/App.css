@@ -68,7 +68,9 @@
 .table td:hover {
   background-color: #f8b826; /* Màu nền khi ô được chọn */
 }
-
+.table tr:hover .circle-status {
+  display: block;/* Màu nền khi ô được chọn */
+}
 .table-header {
   position: sticky;
   top: -2px;
@@ -85,18 +87,41 @@
   justify-content: center;
 }
 .circle-view{
-  width: 10px;
-  height: 10px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%; 
   margin: 1px;
   display: flex;
+  position: relative;
   /* z-index: 1000; */
 }
 .circle-blue{
-  background-color: blue; 
+  background-color: rgb(0 145 0);
 }
 .circle-red{
   background-color: rgb(255, 0, 13); 
+}
+.circle-status{
+  position: absolute;
+  padding: 2px 12px;
+  border-radius: 3px;
+  left: -80px;
+  margin-top: -10px;
+  display: none;
+}
+.circle-status-on{
+  background-color:rgb(0 145 0) ;
+  color: #fff;
+
+}
+.circle-status-off{
+  background-color: rgb(255, 0, 13); 
+  color: #fff;
+
+}
+
+.circle-view:hover .circle-status{
+  display: block;
 }
 
 

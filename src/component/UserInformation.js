@@ -62,10 +62,10 @@ const columns = [
       accessor: 'userEmail',
       width: '30%',
     },
-    {
-      Header: 'Description',
-      accessor: 'userDescription',
-      width: '15%',
-    },
+    // {
+    //   Header: 'Description',
+    //   accessor: 'userDescription',
+    //   width: '15%',
+    // },
   ];
 
