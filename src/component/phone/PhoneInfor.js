@@ -17,6 +17,7 @@ class PhoneInfor extends Component {
                 btnSearchID = "btn-search-computer"
                 api = "/api/Phones"
                 columns = {columns}
+                enableEdit = {true}
                 >
                     
             </InformationTable>}>

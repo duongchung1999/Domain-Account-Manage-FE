@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom';
 class MenuSide extends Component {
     render() {
         const { isMenuSideVisible } = this.props;
+        var userName = localStorage.getItem("name");
+        console.log(userName);
         return (
             <div className={isMenuSideVisible ? 'layoutContainer d-none d-md-inline-block' : 'layoutContainer d-none d-md-inline-block'}>
             {/* <div className={isMenuSideVisible ? 'layoutContainer d-none d-md-inline-block' : 'layoutContainer d-none d-md-inline-block'}> */}
@@ -17,6 +19,7 @@ class MenuSide extends Component {
                             <NavItem path="/printer" itemName="Printer IP Address" icon = {<i className="nav-icon fa-solid fa-print"></i>}/>
                             <NavItem path="/phone" itemName="Phone Numbers" icon = {<i class="nav-icon fa-solid fa-phone"></i>}/>
                             <NavItem path="/document" itemName="Documents" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
+                            <NavItem path="/history" itemName="History" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
                             
                         </ul>
                         
@@ -25,7 +28,7 @@ class MenuSide extends Component {
                     <div className='menuSide-footer'>
                         <div className="small">Logged in as</div>
                         <i class="fa-solid fa-diagram-project"></i>
-                        <span className="ml-2">Foxlink IT</span>
+                        <span className="ml-2">{userName?userName:"Guest"}</span>
                     </div>
 
                     

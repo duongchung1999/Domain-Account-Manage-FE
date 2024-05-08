@@ -13,6 +13,7 @@ import Document from './component/document/Document';
 import Register from './component/register/Register';
 import ChangePassword from './component/changePassword/ChangePassword';
 import PhoneInfor from './component/phone/PhoneInfor';
+import History from './component/history/History';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path: "/phone",
     element: <PhoneInfor />,
+  },
+  {
+    path: "/history",
+    element: <History />,
   },
 ]);
 

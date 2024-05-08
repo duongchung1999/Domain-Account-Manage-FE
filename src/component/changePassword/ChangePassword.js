@@ -93,6 +93,8 @@ class ChangePassword extends Component {
                             timer: 2000
                           });
                         localStorage.removeItem("token");
+                        localStorage.removeItem("name");
+                        localStorage.removeItem("role");
                         this.setState({ user });
                         // this.setState({ jsonData: responseData.data });
 

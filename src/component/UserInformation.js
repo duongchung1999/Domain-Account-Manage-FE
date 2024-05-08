@@ -23,6 +23,7 @@ class UserInformation extends Component {
                   SearchbarLavel = "Search for user"
                   api = "/api/user"
                   columns = {columns}
+                  enableEdit = {true} 
                   >
                       
               </InformationTable>}>

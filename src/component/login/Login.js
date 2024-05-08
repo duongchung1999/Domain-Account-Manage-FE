@@ -54,6 +54,8 @@ class Login extends Component {
                     let user = responseData.flag;
                     if (user) {
                         localStorage.setItem('token', responseData.token);
+                        localStorage.setItem('name', responseData.name);
+                        localStorage.setItem('role', responseData.role);
                         Swal.fire({
                             position: "center",
                             icon: "success",

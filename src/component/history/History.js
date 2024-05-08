@@ -7,22 +7,23 @@ const apiUrl = process.env.REACT_APP_API_URL;
 const apiPage = axios.create({
   baseURL: apiUrl,
 });
-class Computer extends Component {
+
+class History extends Component {
     render() {
         return (
             <App 
-            h1Title="Computer Information" 
-            h4Title = "This Table show Computer informations of Foxlink - DN1" 
-            pContent = "You can find any Computer"
+            h1Title="History" 
+            h4Title = "This table displays the operation history" 
+            pContent = "You can review the changes"
             bodyTable = {
             <InformationTable 
-                title="Computer Table" 
-                changeTitle="Computer Information" 
+                title="History Table" 
+                changeTitle="History Information" 
                 // container = {<UserTable/>}
                 btnSearchID = "btn-search-computer"
-                api = "/api/Computer"
+                api = "/api/ActionRecord"
                 columns = {columns}
-                enableEdit = {true}
+                enableEdit = {false}
                 >
                     
             </InformationTable>}>
@@ -32,7 +33,7 @@ class Computer extends Component {
     }
 }
 
-export default Computer;
+export default History;
 
 const columns = [
     {
@@ -41,24 +42,24 @@ const columns = [
       width: '5%',
     },
     {
-      Header: 'Computer Name',
-      accessor: 'cpuName',
-      width: '30%',
+      Header: 'Operation name',
+      accessor: 'name',
+      width: '20%',
     },
     
     {
-      Header: 'User Name',
-      accessor: 'cpuDescription',
-      width: '15%',
+      Header: 'Operator',
+      accessor: 'operator',
+      width: '10%',
     },
     {
-      Header: 'IP',
-      accessor: 'cpuIp',
-      width: '30%',
+      Header: 'History',
+      accessor: 'message',
+      width: '40%',
     },
     {
-        Header: 'Time Update',
-        accessor: 'timeUpdate',
-        width: '20%',
-      },
+      Header: 'Date',
+      accessor: 'createDate',
+      width: '20%',
+    },
   ];

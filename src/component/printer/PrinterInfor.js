@@ -16,6 +16,7 @@ class PrinterInfor extends Component {
                 btnSearchID = "btn-search-printer"
                 api = "/api/Printers"
                 columns = {columns}
+                enableEdit = {true}
                 >
                     
             </InformationTable>}>

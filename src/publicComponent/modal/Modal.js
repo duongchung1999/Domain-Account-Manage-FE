@@ -45,6 +45,8 @@ class Modal extends Component {
     var token = localStorage.getItem("token");
     if(token){
       localStorage.removeItem("token");
+      localStorage.removeItem("name");
+      localStorage.removeItem("role");
     }
     this.setState({ isLogin : true,});
   }

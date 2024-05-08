@@ -21,7 +21,8 @@ class InformationTable extends Component {
             rowData: null,
             showUpdate: true,
             changeData:false,
-            user:false
+            user:false,
+            enableEdit:true
         };
     }
     componentDidMount(){
@@ -48,10 +49,13 @@ class InformationTable extends Component {
     }
 
     toggleModal = (rowData) => {
-      this.setState(prevState => ({ 
-        showModal: !prevState.showModal ,
-        rowData: rowData
-      }));
+      if(this.props.enableEdit){
+        this.setState(prevState => ({ 
+          showModal: !prevState.showModal ,
+          rowData: rowData
+        }));
+      }
+      
       // console.log(rowData);
     }
     fetchData = async () => {
@@ -72,6 +76,7 @@ class InformationTable extends Component {
 
     render() {
       const { showModal,rowData,user  } = this.state;
+      const {enableEdit} = this.props;
         return (
             <div>
                 <div className="card border-primary">
@@ -82,13 +87,14 @@ class InformationTable extends Component {
                             <div>
                                 <i className="fa-solid fa-table" style={{ marginRight: '10px' }}></i> 
                                 {this.props.title}
-                                <Button 
+                                {enableEdit && (<Button 
                                 variant="primary" 
                                 className={`btn-show-modal ${this.props.btnAdd}`} 
                                 style={{ marginLeft: '20px' }}
                                 onClick={this.toggleModal} >
                                   Add
-                                </Button>
+                                </Button>)}
+                                
                                 </div>
                                 <Searchbar 
                                 btnID = {this.props.SearchbarId} 
@@ -268,7 +274,11 @@ const Table = ({ columns, data ,toggleModal}) => {
                               </div>
                           </div>
                                 )
-                                 : ( cell.render('Cell') )}
+                                 : cell.column.Header === 'History' ?(
+                                  <div className=''>
+                                     <div dangerouslySetInnerHTML={{ __html: cell.value }} />
+                                  </div>
+                                 ):( cell.render('Cell') )}
                       </td>
                     ))}
                   </tr>

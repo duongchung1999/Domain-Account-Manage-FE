@@ -20,9 +20,12 @@ class NavHeader extends Component {
         this.setState({
             logout:true
         });
+
     }
     LogoutFunction = () =>{
         localStorage.removeItem("token");
+        localStorage.removeItem("name");
+        localStorage.removeItem("role");
         Swal.fire({
             position: "center",
             icon: "success",
