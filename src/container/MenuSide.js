@@ -19,7 +19,7 @@ class MenuSide extends Component {
                             <NavItem path="/printer" itemName="Printer IP Address" icon = {<i className="nav-icon fa-solid fa-print"></i>}/>
                             <NavItem path="/phone" itemName="Phone Numbers" icon = {<i class="nav-icon fa-solid fa-phone"></i>}/>
                             <NavItem path="/document" itemName="Documents" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
-                            <NavItem path="/history" itemName="History" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
+                            <NavItem path="/history" itemName="History" icon = {<i class="nav-icon fa-solid fa-clock-rotate-left"></i>}/>
                             
                         </ul>
                         
