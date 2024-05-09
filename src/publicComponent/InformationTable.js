@@ -25,9 +25,35 @@ class InformationTable extends Component {
             enableEdit:true
         };
     }
+
+    getWithExpiry(key) {
+      const itemStr = localStorage.getItem(key)
+      // Nếu không tồn tại, hoặc đã hết hạn, trả về null
+      if (!itemStr) {
+          return null
+      }
+      try{
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+        // Kiểm tra xem thời gian hết hạn đã đến chưa
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key)
+            return null
+        }
+        return item.value
+      }
+      catch {
+        return null
+      }
+      
+  }
     componentDidMount(){
-      let token = localStorage.getItem("token");
+      // let token = localStorage.getItem("token");
+      let token = this.getWithExpiry("token");
+      let name = this.getWithExpiry("name");
+      let role = this.getWithExpiry("role");
       if (token) {
+      
           this.setState({ user: true });
       }
     }

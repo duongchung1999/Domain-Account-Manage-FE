@@ -24,6 +24,31 @@ class Login extends Component {
             this.setState({ user: true });
         }
     }
+    setWithExpiry(key, value, ttl) {
+        const now = new Date()
+        const item = {
+            value: value,
+            expiry: now.getTime() + ttl // thời gian hết hạn
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+    }
+    
+    // Lấy giá trị từ localStorage
+    getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+        // Nếu không tồn tại, hoặc đã hết hạn, trả về null
+        if (!itemStr) {
+            return null
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+        // Kiểm tra xem thời gian hết hạn đã đến chưa
+        if (now.getTime() > item.expiry) {
+            localStorage.removeItem(key)
+            return null
+        }
+        return item.value
+    }
     
     handleSubmit = async (event) => {
         event.preventDefault(); 
@@ -53,9 +78,13 @@ class Login extends Component {
                     // console.log(123);
                     let user = responseData.flag;
                     if (user) {
-                        localStorage.setItem('token', responseData.token);
-                        localStorage.setItem('name', responseData.name);
-                        localStorage.setItem('role', responseData.role);
+                        // localStorage.setItem('token', responseData.token);
+                        // localStorage.setItem('name', responseData.name);
+                        // localStorage.setItem('role', responseData.role);
+
+                        this.setWithExpiry('token', responseData.token, 30 * 60 * 1000)
+                        this.setWithExpiry('name', responseData.name, 30 * 60 * 1000)
+                        this.setWithExpiry('role', responseData.role, 30 * 60 * 1000)
                         Swal.fire({
                             position: "center",
                             icon: "success",

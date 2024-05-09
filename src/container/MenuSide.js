@@ -7,6 +7,7 @@ class MenuSide extends Component {
     render() {
         const { isMenuSideVisible } = this.props;
         var userName = localStorage.getItem("name");
+        const item = JSON.parse(userName)
         console.log(userName);
         return (
             <div className={isMenuSideVisible ? 'layoutContainer d-none d-md-inline-block' : 'layoutContainer d-none d-md-inline-block'}>
@@ -28,7 +29,7 @@ class MenuSide extends Component {
                     <div className='menuSide-footer'>
                         <div className="small">Logged in as</div>
                         <i class="fa-solid fa-diagram-project"></i>
-                        <span className="ml-2">{userName?userName:"Guest"}</span>
+                        <span className="ml-2">{userName?item.value:"Guest"}</span>
                     </div>
 
                     
