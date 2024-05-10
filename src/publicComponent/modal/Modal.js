@@ -58,6 +58,7 @@ class Modal extends Component {
     const { formData } = this.state;
     const requestBody = {};
     const token = localStorage.getItem('token');
+    const item = JSON.parse(token)
     
     Object.keys(formData).forEach(key => {
       requestBody[key] = formData[key];
@@ -67,7 +68,7 @@ class Modal extends Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${item.value}`, 
         },
         body: JSON.stringify(requestBody),
       });
@@ -170,6 +171,7 @@ class Modal extends Component {
     const { formData } = this.state;
     const requestBody = {};
     const token = localStorage.getItem('token');
+    const item = JSON.parse(token)
     
     Object.keys(formData).forEach(key => {
       requestBody[key] = formData[key];
@@ -188,7 +190,7 @@ class Modal extends Component {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`, 
+              Authorization: `Bearer ${item.value}`, 
             },
             body: JSON.stringify(requestBody),
           });
@@ -301,6 +303,7 @@ class Modal extends Component {
   deleteItem = async () => {
     const { formData } = this.state;
     const token = localStorage.getItem('token');
+    const item = JSON.parse(token);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -316,7 +319,7 @@ class Modal extends Component {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`, 
+              Authorization: `Bearer ${item.value}`, 
             }
           });
       
