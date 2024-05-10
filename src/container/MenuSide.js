@@ -8,7 +8,7 @@ class MenuSide extends Component {
         const { isMenuSideVisible } = this.props;
         var userName = localStorage.getItem("name");
         const item = JSON.parse(userName)
-        console.log(userName);
+        // console.log(userName);
         return (
             <div className={isMenuSideVisible ? 'layoutContainer d-none d-md-inline-block' : 'layoutContainer d-none d-md-inline-block'}>
             {/* <div className={isMenuSideVisible ? 'layoutContainer d-none d-md-inline-block' : 'layoutContainer d-none d-md-inline-block'}> */}
@@ -18,9 +18,9 @@ class MenuSide extends Component {
                             <NavItem path="/home" itemName="User Information" icon = {<i className="nav-icon fa-solid fa-users"></i>}/>
                             <NavItem path="/computer" itemName="Computer Information" icon = {<i className="nav-icon fa-solid fa-network-wired"></i>}/>
                             <NavItem path="/printer" itemName="Printer IP Address" icon = {<i className="nav-icon fa-solid fa-print"></i>}/>
-                            <NavItem path="/phone" itemName="Phone Numbers" icon = {<i class="nav-icon fa-solid fa-phone"></i>}/>
+                            <NavItem path="/phone" itemName="Phone Numbers" icon = {<i className="nav-icon fa-solid fa-phone"></i>}/>
                             <NavItem path="/document" itemName="Documents" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
-                            <NavItem path="/history" itemName="History" icon = {<i class="nav-icon fa-solid fa-clock-rotate-left"></i>}/>
+                            <NavItem path="/history" itemName="History" icon = {<i className="nav-icon fa-solid fa-clock-rotate-left"></i>}/>
                             
                         </ul>
                         
@@ -28,7 +28,7 @@ class MenuSide extends Component {
 
                     <div className='menuSide-footer'>
                         <div className="small">Logged in as</div>
-                        <i class="fa-solid fa-diagram-project"></i>
+                        <i className="fa-solid fa-diagram-project"></i>
                         <span className="ml-2">{userName?item.value:"Guest"}</span>
                     </div>
 
@@ -43,7 +43,7 @@ class MenuSide extends Component {
 function NavItem(props){
     return(
         <li>
-            <NavLink to={props.path}  className="nav-link" activeClassName="active">{props.icon}  {props.itemName}</NavLink>
+            <NavLink to={props.path}  className ="nav-link">{props.icon}  {props.itemName}</NavLink>
         </li>
     )
 }

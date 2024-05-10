@@ -422,7 +422,7 @@ class Modal extends Component {
               <div className="container1 js-modal-container">
                 <div className="modal-close js-modal-close" 
                   onClick={this.handleCloseModal}>
-                  <i class="fa-solid fa-circle-xmark"></i>
+                  <i className="fa-solid fa-circle-xmark"></i>
                 </div>
                 <header className="modal-header">
                   <i className="header-bag ti-bag" />
@@ -431,9 +431,10 @@ class Modal extends Component {
                 <div className="modal-body">
                   <div className='row'>
                     <div className='col-7'>
-                        {columns.map(column => (
+                        {columns.map((column,index) => (
                           column.Header !== 'No' && 
                           <ItemChange 
+                          key={index}
                           defaultValue={this.props.defaultValue} 
                           itemName={column.Header} 
                           itemAccesor={column.accessor}
@@ -540,8 +541,6 @@ class ItemChange extends Component {
             type="text"
             className="modal-input col-10"
             placeholder={"  Type New " + this.props.itemName + " in here..."}
-            defaultValue={itemValue }   
-            // defaultValue={this.state.inputValue }   
             value={this.state.inputValue}
             onChange={this.handleInputChange}
           />

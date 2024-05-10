@@ -301,7 +301,7 @@ const Table = ({ columns, data ,toggleModal}) => {
                           </div>
                                 )
                                  : cell.column.Header === 'History' ?(
-                                  <div className=''>
+                                  <div>
                                      <div dangerouslySetInnerHTML={{ __html: cell.value }} />
                                   </div>
                                  ):( cell.render('Cell') )}
