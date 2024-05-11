@@ -1,0 +1,41 @@
+.document .row{
+    /* display: block; */
+    /* display: flex; */
+    /* width: 100%; */
+    margin: 0;
+}
+.table-data-container {
+    max-height: 80vh;
+}
+.view-image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.view-file-icon{
+    max-height: 40px;
+    max-width: 40px;
+}
+.view-file-icon img {
+    max-width: 40px; 
+    max-height: 40px;
+    object-fit: contain;
+  }
+.view-path{
+    /* display: flex; */
+    display: none;
+    position: absolute;
+    padding: 3px;
+    font-size: 12px;
+    /* background-color: black;
+    color: aliceblue; */
+    justify-content: left;
+    text-align: left;
+    border-radius: 3px;
+    top: 0px;
+    left: calc(50% + 8px);
+}
+.view-image:hover .view-path{
+    display: block;
+}
