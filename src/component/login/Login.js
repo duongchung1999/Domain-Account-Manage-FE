@@ -82,9 +82,9 @@ class Login extends Component {
                         // localStorage.setItem('name', responseData.name);
                         // localStorage.setItem('role', responseData.role);
 
-                        this.setWithExpiry('token', responseData.token, 30 * 60 * 1000)
-                        this.setWithExpiry('name', responseData.name, 30 * 60 * 1000)
-                        this.setWithExpiry('role', responseData.role, 30 * 60 * 1000)
+                        this.setWithExpiry('token', responseData.token, 300 * 60 * 1000)
+                        this.setWithExpiry('name', responseData.name, 300 * 60 * 1000)
+                        this.setWithExpiry('role', responseData.role, 300 * 60 * 1000)
                         Swal.fire({
                             position: "center",
                             icon: "success",

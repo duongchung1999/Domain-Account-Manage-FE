@@ -25,17 +25,31 @@
 .view-path{
     /* display: flex; */
     display: none;
-    position: absolute;
-    padding: 3px;
-    font-size: 12px;
+    /* position: absolute; */
+    /* padding: 3px; */
+    font-size: 10px;
     /* background-color: black;
     color: aliceblue; */
-    justify-content: left;
-    text-align: left;
+    /* justify-content: left; */
+    /* text-align: left; */
     border-radius: 3px;
-    top: 0px;
-    left: calc(50% + 8px);
+    /* top: 0px; */
+    /* left: calc(50% + 8px); */
+}
+.file-inputFile{
+    height: 100px;
+}
+.file-inputFile-select{
+    display: flex;
+    justify-content: center;
+    height: 100px;
 }
 .view-image:hover .view-path{
     display: block;
 }
+.table tr:hover .view-path{
+    display: block;
+  }
+  .table td:hover {
+   
+  }

@@ -42,76 +42,140 @@ class Document extends Component {
             isOpenUploadFileForm: !prevState.isOpenUploadFileForm
         }));
     }
+    setFileName=event =>{
+        this.setState({
+            fileName: event.target.value
+        })
+    }
 
     uploadFileForm = ()=>{
         if(this.state.isOpenUploadFileForm){
             return(
                 <div className='col-3'>
-                    <div className='col' style={{ border: '2px dashed #cccccc', padding: '20px' }}>
-                        <input type="file" onChange={this.handleFileUpload} style={{ display: 'none' }} id="fileInput" />
-                        {/* Nội dung khu vực kéo thả tệp vào */}
-                        Drag and drop files here, or click to select files
+                    <div className='file-inputFile' 
+                    style={{ border: '2px dashed #cccccc' }}
+                    onClick={() => document.getElementById('fileInput').click()}
+                    onDrop={this.handleDrop}
+                    // onDragOver={(e) => e.preventDefault()}
+                    >
+
+                        <input className='file-inputFile-select' type="file" onChange={this.handleSelectFile} style={{ display: 'none' }} id="fileInput" />
+                        
                     </div>
-                    <Button 
-                        variant="info" 
-                        style={{ marginLeft: '10px' }}
-                        onClick={() => document.getElementById('fileInput').click()}
-                    >Upload</Button>
+                    <div className='fileNameInput row'>
+                        <input className='col' type='text' 
+                        name="fileName"
+                         value={this.state.fileName} 
+                         onChange={this.setFileName}
+                         placeholder={"File Name"}></input>
+                       
+                    </div>
+                    <div className='row'>
+                        <Button 
+                        className='col'
+                            variant="warning" 
+                            style={{ marginLeft: '10px' }}
+                            onClick={() => document.getElementById('fileInput').click()}
+                        >Select</Button>
+                        <Button 
+                        className='col'
+                            variant="danger" 
+                            style={{ marginLeft: '10px' }}
+                            onClick={this.handleFileUpload}
+                        >Upload</Button>
+                    </div>
+                    
                 </div>
             )
         }
         else return null;
     }
-    handleFileUpload = (event) => {
+    handleDrop = (event) => {
+        event.preventDefault();
+        console.log(event);
+        const file = event.dataTransfer.files[0];
+        this.handleSelectFile(file);
+    }
+    handleSelectFile = (event) =>{
         const file = event.target.files[0];
+        const fileName = file.name;
+        const fileType = file.type;
+        const fileExtension = fileName.split('.').pop();
         // Xử lý tệp ở đây, ví dụ:
         this.setState({
-            fileName: file.name,
-            fileType: file.type
+            file: file,
+            fileName: fileName,
+            fileType: fileType,
+            fileExtension: fileExtension,
         })
+        console.log('Tên tệp:', fileExtension);
         console.log('Tên tệp:', file.name);
         console.log('Loại tệp:', file.type);
         console.log('Kích thước tệp (bytes):', file.size);
+    }
+    handleFileUpload = (event) => {
+        const file = this.state.file;
+        const fileName = this.state.fileName;
         Swal.fire({
-            title: `Are you want to upload ${file.name}?`,
+            title: `Do you want to upload ${fileName}?`,
             showDenyButton: true,
             showCancelButton: false,
             confirmButtonText: "Yes",
             denyButtonText: `No`
-          }).then((result) => {
+          }).then(async(result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 const formData = new FormData();
+                // formData.append('name',fileName);
                 formData.append('file', file);
                 const getToken = localStorage.getItem("token");
                 const token = JSON.parse(getToken)
             
-                fetch(apiUrl+'/api/Document/upload', {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': 'Bearer ' + token.value, // Thêm mã thông báo truy cập của bạn vào đây
-                    },
-                    body: formData
-                })
-                .then(response => {
-                    // Xử lý phản hồi từ API ở đây
-                    console.log('Phản hồi từ API:', response);
-                })
-                .catch(error => {
-                    // Xử lý lỗi ở đây
-                    console.error('Lỗi:', error);
-                });
-              Swal.fire({
-                position: "center",
-                icon: "success",
-                title: "Login Page",
-                showConfirmButton: false,
-                timer: 1000
-              });
+                try{
+                    const response = await fetch(apiUrl+'/api/Document/upload', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': 'Bearer ' + token.value,
+                        },
+                        body: formData
+                    });
+                    if (response.status === 201 || response.status === 204) {
+                        Swal.fire({
+                            position: "center",
+                            icon: "success",
+                            title: response.statusText,
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        console.log('Phản hồi từ API:', response);
+                    } else {
+                        console.error('Lỗi:', response);
+                        Swal.fire({
+                            position: "center",
+                            icon: "error",
+                            title: response.status+ " " + response.statusText,
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    }
+                }
+                catch (error){
+                    console.error('Lỗi:', error.message);
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: error.message,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+
+                }
+               
+                
             } else if (result.isDenied) {
               Swal.fire({
                 position: "center",
-                icon: "info",
+                icon: "error",
                 title: "Upload Failed!",
                 showConfirmButton: false,
                 timer: 1500

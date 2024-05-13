@@ -58,7 +58,7 @@ class Modal extends Component {
     const { formData } = this.state;
     const requestBody = {};
     const token = localStorage.getItem('token');
-    const item = JSON.parse(token)
+    const item = JSON.parse(token);
     
     Object.keys(formData).forEach(key => {
       requestBody[key] = formData[key];

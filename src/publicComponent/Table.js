@@ -9,6 +9,9 @@ import excel from '../FileIcon/excel.png';
 import ppt from '../FileIcon/ppt.png';
 import exe from '../FileIcon/exe.png';
 import otherFile from '../FileIcon/file.png';
+import Swal from 'sweetalert2';
+
+const apiUrl = process.env.REACT_APP_API_URL;
 
 
 const Table = ({ columns, data ,toggleModal}) => {
@@ -143,10 +146,91 @@ const Table = ({ columns, data ,toggleModal}) => {
 
     const buttonView = (buttonName) => {
       return   <Button 
-      variant="danger" 
+      variant="info" 
       style={{ marginLeft: '10px' }}
       onClick={openFilePath}
       >{buttonName}</Button>
+    }
+
+    const buttonDelete = () => {
+      const role = localStorage.getItem('role');
+      const item = JSON.parse(role);
+      if (item && item.value == "Admin")
+      return   <Button 
+      variant="danger" 
+      style={{ marginLeft: '10px' }}
+      onClick={deleteFile}
+      >Delete</Button>
+      else return null;
+    }
+    const deleteFile = () =>{
+      Swal.fire({
+        title: `Do you want to Delete ${cell.row.original.name}?`,
+        showDenyButton: true,
+        showCancelButton: false,
+        confirmButtonText: "Yes",
+        denyButtonText: `No`
+      }).then(async(result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            const id = cell.row.original.id;
+            const formData = new FormData();
+            formData.append('id', id);
+            const getToken = localStorage.getItem("token");
+            const token = JSON.parse(getToken);
+        
+            try{
+                const response = await fetch(apiUrl+'/api/Document/'+id, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': 'Bearer ' + token.value,
+                    },
+                    body: formData
+                });
+                if (response.status === 200 || response.status === 201) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: response.statusText,
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                    console.log('Phản hồi từ API:', response);
+                } else {
+                    console.error('Lỗi phản hồi:', response);
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: response.status+ " " + response.statusText,
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                }
+            }
+            catch (error){
+                console.error('Lỗi Catch:', error.message);
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: error.message,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+
+            }
+           
+            
+        } else if (result.isDenied) {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Delete Failed!",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      });
+    
     }
 
     const openFilePath = () =>{
@@ -166,10 +250,14 @@ const Table = ({ columns, data ,toggleModal}) => {
   
     return (
       <div className='view-image'>
+        <div className='row'>
         {renderIcon()}
+        {/* {renderButton()} */}
         <div className='view-path'>
-        {/* {cell.row.original.path} */}
         {renderButton()}
+        {buttonDelete()}
+        </div>
+        
           
         </div>
       </div>
