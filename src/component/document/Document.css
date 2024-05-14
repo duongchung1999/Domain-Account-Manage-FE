@@ -36,8 +36,21 @@
     /* top: 0px; */
     /* left: calc(50% + 8px); */
 }
+.fileNameInput{
+    padding: 10px 0px;
+}
 .file-inputFile{
-    height: 100px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* font-size: 50px; */
+    color: #2986b6;
+    cursor: pointer;
+
+}
+.file-inputFile .fa-solid{
+    font-size: 30px;
 }
 .file-inputFile-select{
     display: flex;

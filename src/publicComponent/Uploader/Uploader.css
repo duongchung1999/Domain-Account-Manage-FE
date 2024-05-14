@@ -1,0 +1,27 @@
+.uploader-inputFile {
+    height: 200px;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px dashed #cccccc;
+    flex-direction: column;
+}
+.uploader-select-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height:100%;
+    width: 100%;
+    flex-direction: column;
+    color: #1475cf;
+
+}
+.uploader-fileName{
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color:#1475cf
+}
