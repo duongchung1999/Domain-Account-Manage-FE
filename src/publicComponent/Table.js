@@ -1,16 +1,8 @@
 import React, { useState,useEffect  } from 'react';
 import { useTable, useResizeColumns } from 'react-table';
 import { Button } from 'react-bootstrap';
-import pdf from '../FileIcon/pdf.png';
-import zip from '../FileIcon/zip.png';
-import rar from '../FileIcon/rar.jpg';
-import word from '../FileIcon/word.png';
-import excel from '../FileIcon/excel.png';
-import ppt from '../FileIcon/ppt.png';
-import exe from '../FileIcon/exe.png';
-import otherFile from '../FileIcon/file.png';
 import Swal from 'sweetalert2';
-
+import renderIcon from './renderIcon/RenderIcon';
 const apiUrl = process.env.REACT_APP_API_URL;
 
 
@@ -115,34 +107,6 @@ const Table = ({ columns, data ,toggleModal}) => {
   };
 
   function TypeCellView({ cell }) {
-    const renderIcon = () => {
-      const fileType = cell.row.original.type; // Lấy giá trị của trường "type" từ dữ liệu hàng
-      // Dựa vào fileType để hiển thị icon phù hợp
-      switch (fileType) {
-        case ".pdf":
-          return <ImageView img={pdf} />;
-        case ".zip":
-          return <ImageView img={zip} />;
-        case ".rar":
-          return <ImageView img={rar} />;
-        case ".doc":
-          return <ImageView img={word} />;
-        case ".docx":
-          return <ImageView img={word} />;
-        case ".xls":
-          return <ImageView img={excel} />;
-        case ".xlsx":
-          return <ImageView img={excel} />;
-        case ".ppt":
-          return <ImageView img={ppt} />;
-        case ".pptx":
-          return <ImageView img={ppt} />;
-        case ".exe":
-          return <ImageView img={exe} />;
-        default:
-          return <ImageView img={otherFile} />;
-      }
-    };
 
     const buttonView = (buttonName) => {
       return   <Button 
@@ -251,11 +215,15 @@ const Table = ({ columns, data ,toggleModal}) => {
     return (
       <div className='view-image'>
         <div className='row'>
-        {renderIcon()}
+        {renderIcon(cell.row.original.type)}
         {/* {renderButton()} */}
         <div className='view-path'>
         {renderButton()}
         {buttonDelete()}
+        <div className='view-path-path'>
+        {cell.row.original.path}
+        </div>
+        
         </div>
         
           

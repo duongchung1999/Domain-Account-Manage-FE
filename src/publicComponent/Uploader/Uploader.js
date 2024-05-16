@@ -4,13 +4,19 @@ import { MdCloudUpload,MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
 import { Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import renderIcon from '../renderIcon/RenderIcon';
+
+
 const apiUrl = process.env.REACT_APP_API_URL;
+
 
 function Uploader({ setParentOpenForm }){
     const [image,setImage] = useState(null)
     const [fileName,setFileName] = useState("No selected file")
     const [file,setFile]=useState(null)
     const [openForm,setOpenForm] = useState(true)
+    const [dragging, setDragging] = useState(false);
+   
     const  handleFileUpload = (event) => {
         // const file = file;
         // const fileName = this.state.fileName;
@@ -84,12 +90,39 @@ function Uploader({ setParentOpenForm }){
           });
         
       };
+    const renderImage = () =>{
+        console.log(file)
+        if(file && file.name.includes(".jpg")){
+            return <img className='view-image' src={image} alt={fileName}/>
+        }
+        else {
+            const fileExtension = file.name.split('.').pop();
+            const extension = "."+fileExtension;
+            return renderIcon(extension);
+        }
+    }
+    const handleDrop = (event) => {
+        event.preventDefault();
+        setDragging(false);
+        const files = event.dataTransfer.files;
+        if (files && files[0]) {
+            setFileName(files[0].name);
+            setImage(URL.createObjectURL(files[0]));
+            setFile(files[0]);
+        }
+    };
     return(
         
         <main>
             <form
             className='uploader-inputFile col' 
             onClick={()=> document.querySelector(".file-inputFile-select").click()}
+            onDragOver={(e) => {
+                e.preventDefault();
+                setDragging(true);
+            }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={handleDrop}
             >
                 <input
                         type="file"
@@ -98,13 +131,16 @@ function Uploader({ setParentOpenForm }){
                         onChange={({target: {files}})=>{
                             files[0] && setFileName(files[0].name);
                             if(files){
-                                setImage(URL.createObjectURL(files[0]))
-                                setFile(files[0])
+                                setImage(URL.createObjectURL(files[0]));
+                                setFile(files[0]);
                             }
                         }}
                     />
                 {image?
-                <img src={image} width={60} height={60} alt={fileName}/>
+                
+                // <img src={image} width={120} height={120} alt={fileName}/>
+                renderImage()
+                
                 :
                 <div className='uploader-select-area'>
                 <MdCloudUpload className='uploader-select-icon' color='#1475cf' size={90}/> 
@@ -122,6 +158,7 @@ function Uploader({ setParentOpenForm }){
                     onClick={()=>{
                         setFileName("No Selected file");
                         setImage(null);
+                        setFile(null);
                     }}/>
                 </span>
 

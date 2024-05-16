@@ -25,3 +25,7 @@
     justify-content: space-between;
     color:#1475cf
 }
+main .view-image{
+    max-width: 400px ;
+    max-height: 200px;
+}
