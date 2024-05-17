@@ -17,12 +17,14 @@
 .view-file-icon{
     max-height: 40px;
     max-width: 40px;
+    margin: 5px;
 }
 .view-file-icon img {
-    max-width: 40px; 
-    max-height: 40px;
+    width: 40px; 
+    height: 40px;
     object-fit: contain;
     cursor: pointer;
+    /* padding: ; */
   }
 .view-path{
     /* display: flex; */
@@ -41,16 +43,21 @@
 }
 .view-path-path{
     position: absolute;
-    top: -15px;
+    max-height: 200px;
+    width: 200px;
+    top: -50px;
     /* left: calc(0px- var(--element-width)); */
-    left: -600px;
+    left: -250px;
     padding: 5px;
     /* text-align: right ; */
     color: aliceblue;
     background-color: rgb(30, 30, 30);
     font-size: 12px;
-    border-radius: 2px;
+    border-radius: 10px;
     z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center ;
 }
 .fileNameInput{
     padding: 10px 0px;
@@ -82,3 +89,7 @@
   .table td:hover {
    
   }
+.view-file-icon:hover img{
+    width: 50px;
+    height: 50px;
+}

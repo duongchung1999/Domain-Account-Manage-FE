@@ -222,12 +222,13 @@ const Table = ({ columns, data ,toggleModal}) => {
   
     return (
       <div className='view-image'>
-        <div className='view-image'>
-        {renderIcon(cell.row.original.type,openFilePath)}
+         {renderIcon(cell.row.original.type,openFilePath)}
         {/* {renderButton()} */}
+        
         <div className='view-path'>
-        {/* {renderButton()} */}
         {buttonDelete()}
+        {/* {renderButton()} */}
+        
         <div 
           ref={pathRef}
           className='view-path-path d-none d-md-inline-block'
@@ -236,9 +237,6 @@ const Table = ({ columns, data ,toggleModal}) => {
         {cell.row.original.path}
         </div>
         
-        </div>
-        
-          
         </div>
       </div>
     );
