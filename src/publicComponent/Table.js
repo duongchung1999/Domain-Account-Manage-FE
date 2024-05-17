@@ -1,4 +1,4 @@
-import React, { useState,useEffect  } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTable, useResizeColumns } from 'react-table';
 import { Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
@@ -107,6 +107,14 @@ const Table = ({ columns, data ,toggleModal}) => {
   };
 
   function TypeCellView({ cell }) {
+    const pathRef = useRef(null);
+    const [pathWidth, setPathWidth] = useState(0);
+
+    useEffect(() => {
+      if (pathRef.current) {
+        setPathWidth(pathRef.current.offsetWidth);
+      }
+    }, []);
 
     const buttonView = (buttonName) => {
       return   <Button 
@@ -214,13 +222,17 @@ const Table = ({ columns, data ,toggleModal}) => {
   
     return (
       <div className='view-image'>
-        <div className='row'>
-        {renderIcon(cell.row.original.type)}
+        <div className='view-image'>
+        {renderIcon(cell.row.original.type,openFilePath)}
         {/* {renderButton()} */}
         <div className='view-path'>
-        {renderButton()}
+        {/* {renderButton()} */}
         {buttonDelete()}
-        <div className='view-path-path'>
+        <div 
+          ref={pathRef}
+          className='view-path-path d-none d-md-inline-block'
+          // style={{ left: `-${pathWidth + 60}px` }}
+          >
         {cell.row.original.path}
         </div>
         

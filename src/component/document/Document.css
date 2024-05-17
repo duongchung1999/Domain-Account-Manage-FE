@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
+    flex-direction: column;
 }
 .view-file-icon{
     max-height: 40px;
@@ -21,6 +22,7 @@
     max-width: 40px; 
     max-height: 40px;
     object-fit: contain;
+    cursor: pointer;
   }
 .view-path{
     /* display: flex; */
@@ -39,10 +41,11 @@
 }
 .view-path-path{
     position: absolute;
-    top: -25px;
-    left: -50%;
-    padding: 2px;
-    text-align: center ;
+    top: -15px;
+    /* left: calc(0px- var(--element-width)); */
+    left: -600px;
+    padding: 5px;
+    /* text-align: right ; */
     color: aliceblue;
     background-color: rgb(30, 30, 30);
     font-size: 12px;
@@ -71,10 +74,10 @@
     height: 100px;
 }
 .view-image:hover .view-path{
-    display: block;
+    display: flex;
 }
 .table tr:hover .view-path{
-    display: block;
+    display: flex;
   }
   .table td:hover {
    
