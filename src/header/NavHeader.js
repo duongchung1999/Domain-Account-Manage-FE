@@ -91,11 +91,13 @@ class NavHeader extends Component {
                         <li>
                         <NavLink to="/changePassword" className="dropdown-item">
                             <i class="fa-solid fa-gears nav-icon"></i>
-                            Change Password
+                            Modify Password
                             </NavLink>
                         </li>
                         <li>
                         <a className="dropdown-item" onClick={this.loginFunction}>
+                        
+                        <i class="fa-solid fa-arrow-right-to-bracket nav-icon"></i>
                             Login
                         </a>
                         </li>
@@ -104,7 +106,8 @@ class NavHeader extends Component {
                         </li>
                         <li>
                         <a className="dropdown-item" onClick={this.LogoutFunction}>
-                            {userName?item.value:null } Logout 
+                        <i class="fa-solid fa-arrow-right-from-bracket nav-icon"></i>
+                            Logout {userName?" from "+item.value:null } 
                             
                         </a>
                         </li>
