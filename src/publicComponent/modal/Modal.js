@@ -433,7 +433,7 @@ class Modal extends Component {
                 </header>
                 <div className="modal-body">
                   <div className='row'>
-                    <div className='col-7'>
+                    <div className='col-7 modal-body-row'>
                         {columns.map((column,index) => (
                           column.Header !== 'No' && 
                           <ItemChange 
@@ -446,7 +446,7 @@ class Modal extends Component {
                           />
                         ))}
                     </div>
-                    <div className='col-5'>
+                    <div className='col-5 modal-body-row'>
                       <div className="card border-primary ">
                         <div className="card-body">
                           <h4 className="card-title">New {this.props.title} </h4>

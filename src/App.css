@@ -125,10 +125,11 @@
   display: block;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .UserContainer, .UserContainer-block {
     font-size: 10px; 
     flex-direction: column;
+    font-family: "Gill Sans", sans-serif;
   }
 
   h1{
@@ -140,7 +141,8 @@
   .layoutContainer{
     display: inline-block !important;
     width: 100vw;
-    height: 135px;
+    min-height: 100px;
+    max-height: 135px;
     position: inherit;
   }
   .sb-sidenav{
@@ -150,13 +152,16 @@
   }
   .menuSide-nav{
     flex-direction: row !important;
+    justify-content: space-between !important;
     margin: 0;
   }
   .menuSide-nav li{
     height: 100% !important;
+    
   }
   #table-container{
     padding-top: 10px;
+    width: 100%;
   }
   .menuSide-footer{
     display: none;
@@ -165,11 +170,63 @@
     height: 20px !important;
     width:  20px !important;
   }
+  .col-8{
+    padding: 0 0 0 5px;
+  }
+  .col-4{
+    padding: 0;
+  }
+  .card-body ,.circle-container{
+    padding: 0px;
+  }
+  .circle-view{
+    height: 10px;
+    width: 10px;
+  }
 
+
+
+  /* Modal */
+  .modal .container1{
+    width: 90% !important;
+  }
+
+  .modal-header{
+    font-size: 20px !important;
+    height: 80px !important;
+  }
+  .modal-body{
+    padding: 5px !important;
+  }
+  .modal-body .row{
+    margin: 0 !important;
+    width: 100%;
+  }
+  .modal-body-row{
+    padding: 3px;
+  }
+  .modal-label{
+    padding: 0 !important;
+    font-size: 10px !important;
+    display: inline-block;
+  }
+  .modal-input{
+    padding: 5px 1px !important;
+    border-radius: 5px;
+  }
+  .modal .item-change{
+    height: 30px !important;
+  }
+  .card-title{
+    font-size: 13px;
+  }
+  .no-padding{
+    font-size: 10px;
+  }
 }
 
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 300px) {
   .layoutContainer{
     display: none !important;
   }

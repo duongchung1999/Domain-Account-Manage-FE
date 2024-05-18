@@ -42,6 +42,8 @@ class NavHeader extends Component {
 
     render() {
         const { isDropdownOpen,logout } = this.state;
+        var userName = localStorage.getItem("name");
+        const item = JSON.parse(userName)
         
         return (
             
@@ -87,7 +89,10 @@ class NavHeader extends Component {
                         aria-labelledby="navbarDropdown"
                     >
                         <li>
-                        <NavLink to="/changePassword" className="dropdown-item">Change Password</NavLink>
+                        <NavLink to="/changePassword" className="dropdown-item">
+                            <i class="fa-solid fa-gears nav-icon"></i>
+                            Change Password
+                            </NavLink>
                         </li>
                         <li>
                         <a className="dropdown-item" onClick={this.loginFunction}>
@@ -99,7 +104,7 @@ class NavHeader extends Component {
                         </li>
                         <li>
                         <a className="dropdown-item" onClick={this.LogoutFunction}>
-                            Logout 
+                            {userName?item.value:null } Logout 
                             
                         </a>
                         </li>
