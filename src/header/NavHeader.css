@@ -8,6 +8,7 @@
     left: 0;
     z-index: 1030;
     background-color: #212529 !important    ;
+    justify-content: space-between;
 }
 .sb-topnav {
     padding-left: 0;

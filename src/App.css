@@ -125,4 +125,55 @@
   display: block;
 }
 
+@media only screen and (max-width: 600px) {
+  .UserContainer, .UserContainer-block {
+    font-size: 10px; 
+    flex-direction: column;
+  }
+
+  h1{
+    font-size: 20px !important;
+  }
+  h4, .btn{
+    font-size: 14px;
+  }
+  .layoutContainer{
+    display: inline-block !important;
+    width: 100vw;
+    height: 135px;
+    position: inherit;
+  }
+  .sb-sidenav{
+    /* flex-direction: row !important; */
+    width: 100% !important;
+    position: relative;
+  }
+  .menuSide-nav{
+    flex-direction: row !important;
+    margin: 0;
+  }
+  .menuSide-nav li{
+    height: 100% !important;
+  }
+  #table-container{
+    padding-top: 10px;
+  }
+  .menuSide-footer{
+    display: none;
+  }
+  .view-file-icon img {
+    height: 20px !important;
+    width:  20px !important;
+  }
+
+}
+
+
+@media only screen and (max-width: 400px) {
+  .layoutContainer{
+    display: none !important;
+  }
+
+}
+
 

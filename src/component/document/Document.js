@@ -123,12 +123,12 @@ const columns = [
     {
       Header: 'File Name',
       accessor: 'name',
-      width: '30%',
+      width: '60%',
     },
     
     {
       Header: 'Type',
       accessor: 'type',
-      width: '15%',
+      width: '35%',
     },
   ];
