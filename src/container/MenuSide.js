@@ -20,6 +20,19 @@ class MenuSide extends Component {
                             <NavItem path="/printer" itemName="Printer IP Address" icon = {<i className="nav-icon fa-solid fa-print"></i>}/>
                             <NavItem path="/phone" itemName="Phone Numbers" icon = {<i className="nav-icon fa-solid fa-phone"></i>}/>
                             <NavItem path="/document" itemName="Documents" icon = {<i className="nav-icon fa-regular fa-folder-open"></i>}/>
+                            
+                            <li className='menuSide-it-asset'>
+                                <a className='nav-link'>
+                                    <i class="nav-icon fa-solid fa-toolbox"></i>
+                                    IT Asset
+                                    <div className='menuSide-2nd'>
+                                        <NavItem path="/itAsset" itemName="Asset" icon = {<i class="nav-icon fa-solid fa-dolly"></i>}/>
+                                        <NavItem path="/cabinet" itemName="Cabinet" icon = {<i class="nav-icon fa-solid fa-boxes-stacked"></i>}/>
+                                        <NavItem path="/cabinetAsset" itemName="Cabinet Asset" icon = {<i class="nav-icon fa-solid fa-boxes-packing"></i>}/>
+                                    </div>
+                                    
+                                </a>
+                            </li>
                             <NavItem path="/history" itemName="History" icon = {<i className="nav-icon fa-solid fa-clock-rotate-left"></i>}/>
                             
                         </ul>
@@ -44,6 +57,14 @@ function NavItem(props){
     return(
         <li>
             <NavLink to={props.path}  className ="nav-link">{props.icon}  {props.itemName}</NavLink>
+        </li>
+    )
+}
+
+function NavItem2nd(props){
+    return(
+        <li>
+            <NavLink to={props.path}  className ="nav-link-2nd">{props.icon}  {props.itemName}</NavLink>
         </li>
     )
 }

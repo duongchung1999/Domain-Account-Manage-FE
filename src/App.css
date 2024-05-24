@@ -125,6 +125,12 @@
   display: block;
 }
 
+.view-asset-image img{
+  max-width: 100%;
+  object-fit: contain;
+}
+/* Css Image */
+
 @media only screen and (max-width: 900px) {
   .UserContainer, .UserContainer-block {
     font-size: 10px; 
@@ -232,5 +238,8 @@
   }
 
 }
+
+
+
 
 

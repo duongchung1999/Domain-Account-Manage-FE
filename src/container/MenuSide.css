@@ -45,6 +45,7 @@
     padding: 10px; /* Có thể điều chỉnh padding tùy thích */
     text-decoration: none;
     color: rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
     
 }
 
@@ -71,4 +72,31 @@
     bottom: 0;
     padding-bottom: 20px;
     margin: 0;
+}
+.menuSide .menuSide-2nd{
+    display: none;
+    /* display: none;   */
+    /* background-color: #495158; */
+    /* position: absolute; */
+    margin-top: 16px;
+    margin-left: -10px;
+    width: 230px;
+    left: 0;
+    padding-left: 24px;
+    flex-direction: column;
+}
+.menuSide .menuSide-it-asset:hover{
+    height: auto;
+}
+.menuSide .menuSide-it-asset:hover .menuSide-2nd{
+    display: flex;
+}
+
+.menuSide .menuSide-it-asset .menuSide-2nd a:hover{
+    background-color: #495158 ;
+}
+
+.menuSide .menuSide-it-asset{
+    position: relative;
+    height: auto;
 }

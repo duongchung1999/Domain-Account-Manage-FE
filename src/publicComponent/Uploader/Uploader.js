@@ -10,12 +10,14 @@ import renderIcon from '../renderIcon/RenderIcon';
 const apiUrl = process.env.REACT_APP_API_URL;
 
 
-function Uploader({ setParentOpenForm }){
+function Uploader({ setParentOpenForm,api,id,method,isFetchData}){
     const [image,setImage] = useState(null)
     const [fileName,setFileName] = useState("No selected file")
     const [file,setFile]=useState(null)
     const [openForm,setOpenForm] = useState(true)
     const [dragging, setDragging] = useState(false);
+    // let fetchData = isFetchData = false;
+    // const [id,setId] = useState(null);
    
     const  handleFileUpload = (event) => {
         // const file = file;
@@ -31,13 +33,16 @@ function Uploader({ setParentOpenForm }){
             if (result.isConfirmed) {
                 const formData = new FormData();
                 // formData.append('name',fileName);
+                if(id){
+                    api=`${api}?id=${id}`;
+                }
                 formData.append('file', file);
                 const getToken = localStorage.getItem("token");
                 const token = JSON.parse(getToken)
             
                 try{
-                    const response = await fetch(apiUrl+'/api/Document/upload', {
-                        method: 'POST',
+                    const response = await fetch(apiUrl+api, {
+                        method: method,
                         headers: {
                             'Authorization': 'Bearer ' + token.value,
                         },
@@ -53,7 +58,8 @@ function Uploader({ setParentOpenForm }){
                         });
                         // setOpenForm(false);
                         setParentOpenForm(false) ;
-                        console.log('Phản hồi từ API:', response);
+                        isFetchData();
+                        // console.log('Phản hồi từ API:', response);
                     } else {
                         console.error('Lỗi:', response);
                         Swal.fire({
@@ -66,7 +72,7 @@ function Uploader({ setParentOpenForm }){
                     }
                 }
                 catch (error){
-                    console.error('Lỗi:', error.message);
+                    console.error('Lỗi catch:', error.message);
                     Swal.fire({
                         position: "center",
                         icon: "error",
@@ -75,6 +81,9 @@ function Uploader({ setParentOpenForm }){
                         timer: 2000
                     });
 
+                }
+                finally{
+                    removeFile();
                 }
                
                 
@@ -86,12 +95,14 @@ function Uploader({ setParentOpenForm }){
                 showConfirmButton: false,
                 timer: 1500
               });
+              removeFile();
             }
           });
+          
         
       };
     const renderImage = () =>{
-        console.log(file)
+        // console.log(file)
         if(file && file.name.includes(".jpg")){
             return <img className='view-image' src={image} alt={fileName}/>
         }
@@ -111,9 +122,16 @@ function Uploader({ setParentOpenForm }){
             setFile(files[0]);
         }
     };
+    const removeFile = () =>{
+        setFileName("No Selected file");
+        setImage(null);
+        setFile(null);
+
+    }
     return(
         
         <main>
+            {removeFile}
             <form
             className='uploader-inputFile col' 
             onClick={()=> document.querySelector(".file-inputFile-select").click()}

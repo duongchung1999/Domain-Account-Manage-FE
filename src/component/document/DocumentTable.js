@@ -81,9 +81,10 @@ class DocumentTable extends Component {
           rowData: rowData
         }));
       }
-      
-      // console.log(rowData);
     }
+
+    
+
     fetchData = async () => {
       try {
           // const url = apiUrl + this.props.api;
@@ -137,6 +138,7 @@ class DocumentTable extends Component {
                         toggleModal={this.toggleModal}
                         fetchData={this.fetchData}
                         changeData={this.state.changeData}
+                        selectItem={this.props.selectItem}
                         />
                     </div>
                 </div>

@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import App from '../../App';
-import InformationTable from '../../publicComponent/InformationTable';
 import NavHeader from '../../header/NavHeader';
 import MenuSide from '../../container/MenuSide';
-import CardBorder from '../../publicComponent/CardBorder';
 import './Document.css';
 import DocumentTable  from './DocumentTable';
 import { Button } from 'react-bootstrap';
-import Swal from 'sweetalert2';
 import  Uploader from '../../publicComponent/Uploader/Uploader'
 
 
@@ -55,7 +51,7 @@ class Document extends Component {
         if(this.state.isOpenUploadFileForm){
             return(
                 <div className='col-3'>
-                    <Uploader setParentOpenForm={this.setParentOpenForm}/>
+                    <Uploader setParentOpenForm={this.setParentOpenForm} api='/api/Document/upload' method = "POST"/>
                     
                 </div>
             )

@@ -14,6 +14,8 @@ import Register from './component/register/Register';
 import ChangePassword from './component/changePassword/ChangePassword';
 import PhoneInfor from './component/phone/PhoneInfor';
 import History from './component/history/History';
+import Cabinet from './component/cabinet/Cabinet';
+import ItAsset from './component/itAsset/ItAsset';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -58,6 +60,18 @@ const router = createBrowserRouter([
   {
     path: "/history",
     element: <History />,
+  },
+  {
+    path: "/cabinet",
+    element: <Cabinet />,
+  },
+  {
+    path: "/itAsset",
+    element: <ItAsset />,
+  },
+  {
+    path: "/cabinetAsset",
+    element: <Cabinet />,
   },
 ]);
 

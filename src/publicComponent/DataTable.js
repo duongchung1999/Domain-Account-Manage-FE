@@ -6,6 +6,7 @@ class DataTable extends Component {
       super(props);
       this.state = {
         changeData: false,
+        selectedRowData:null,
         data: []
       };
     }
@@ -27,6 +28,7 @@ class DataTable extends Component {
       const newData = await this.props.fetchData(); // Gọi hàm fetchData từ props
       this.setState({ data: newData });
     }
+    
   
     // fetchData = async () => {
     //   try {
@@ -54,6 +56,14 @@ class DataTable extends Component {
             });
         });
     }
+
+    handleRowOnClick = rowData =>{
+      const { selectedRowData } = this.props;
+      selectedRowData = rowData
+      this.setState({ selectedRowData: rowData });
+      // console.log(rowData);
+      // console.log(this.state.selectedRowData);
+    }
     
   
     render() {
@@ -68,7 +78,8 @@ class DataTable extends Component {
           columns={columns} 
           data={filteredData}
           // rowData={this.props.rowData} 
-          toggleModal={this.props.toggleModal} />
+          toggleModal={this.props.toggleModal} 
+          selectItem = {this.props.selectItem}/>
         </div>
       );
     }

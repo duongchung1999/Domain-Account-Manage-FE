@@ -6,7 +6,7 @@ import renderIcon from './renderIcon/RenderIcon';
 const apiUrl = process.env.REACT_APP_API_URL;
 
 
-const Table = ({ columns, data ,toggleModal}) => {
+const Table = ({ columns, data ,toggleModal, selectItem}) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -22,6 +22,10 @@ const Table = ({ columns, data ,toggleModal}) => {
     toggleModal(rowData); 
     // console.log(rowData);
   };
+  const handleRowOnClick = rowData =>{
+    selectItem(rowData);
+    // console.log(rowData);
+  }
   const renderCellContent = (cell) => {
     switch (cell.column.Header) {
       case 'IP':
@@ -54,7 +58,10 @@ const Table = ({ columns, data ,toggleModal}) => {
             {rows.map(row => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()} onDoubleClick={() => handleRowDoubleClick(row.original)}>
+                <tr {...row.getRowProps()} 
+                  onDoubleClick={() => handleRowDoubleClick(row.original)}
+                  onClick={()=>handleRowOnClick(row.original)}
+                  >
                   {row.cells.map(cell => (
                     <td 
                       {...cell.getCellProps()}>
