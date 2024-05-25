@@ -125,10 +125,36 @@
   display: block;
 }
 
-.view-asset-image img{
-  max-width: 100%;
-  object-fit: contain;
+
+.UserContainer .btn-asset{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:100%;
+  width: 100%;
+  flex-direction: column;
+  margin-left: 0;
+  margin-top: 10px;
 }
+
+/* Cabinet */
+/* .img-asset-container {
+  position: relative;
+}
+.img-asset-view-detail{
+  position: absolute;
+  max-width: 650px;
+  height: 650px;
+  left: -670px;
+  top: -120px;
+  z-index: 1;
+  overflow: hidden;
+}
+.img-asset-container img{
+  border-radius: 15px;
+  box-shadow:#212529;
+} */
+
 /* Css Image */
 
 @media only screen and (max-width: 900px) {

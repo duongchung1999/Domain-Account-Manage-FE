@@ -1,34 +1,30 @@
 import React, { Component } from 'react';
-import App from '../../App';
-import InformationTable from '../../publicComponent/InformationTable';
-import axios from 'axios';
+import ItAssetComponent from '../../publicComponent/itAssetComponent/ItAssetComponent';
 
-const apiUrl = process.env.REACT_APP_API_URL;
-const apiPage = axios.create({
-  baseURL: apiUrl,
-});
 
 class ItAsset extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedRowData: null,
+    };
+}
+  selectItem = (rowData)=>{
+    this.setState({ selectedRowData: rowData });
+  }
     render() {
         return (
-            <App 
-            h1Title="Asset Information" 
-            h4Title = "This Table show Assets information of Foxlink - DN1" 
-            pContent = "You can find any Asset"
-            bodyTable = {
-            <InformationTable 
-                title="Asset Table" 
-                changeTitle="Asset Information" 
-                // container = {<UserTable/>}
-                btnSearchID = "btn-search-Asset"
-                api = "/api/ItAsset"
-                columns = {columns}
-                enableEdit = {true}
-                >
-                    
-            </InformationTable>}>
-                
-            </App>
+           <ItAssetComponent 
+              title = "IT Asset"
+              columns={columns}
+              api="/api/ItAsset"
+              apiImage="/api/ItAsset/updateAssetImage"
+              selectItem={this.selectItem}
+              itAssetName={this.state.selectedRowData?this.state.selectedRowData.asset:"Asset"}
+              selectedRowData={this.state.selectedRowData}
+              selectedImage={this.state.selectedRowData?this.state.selectedRowData.assetImage:null}
+              />
+              
         );
     }
 }

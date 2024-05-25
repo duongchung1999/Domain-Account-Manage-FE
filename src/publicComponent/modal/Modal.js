@@ -172,7 +172,7 @@ class Modal extends Component {
     const requestBody = {};
     const token = localStorage.getItem('token');
     const item = JSON.parse(token)
-    
+    let api = apiUrl+ this.props.api;
     Object.keys(formData).forEach(key => {
       requestBody[key] = formData[key];
     });
@@ -186,7 +186,7 @@ class Modal extends Component {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch(apiUrl+ this.props.api , {
+          const response = await fetch(api , {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

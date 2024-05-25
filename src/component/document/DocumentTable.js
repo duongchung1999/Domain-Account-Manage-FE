@@ -26,6 +26,13 @@ class DocumentTable extends Component {
         };
     }
 
+    componentDidUpdate(prevProps,prevState){
+      if(prevProps.changeData != this.props.changeData){
+          this.setState(prevState => ({
+            changeData: !prevState.changeData
+        }));
+      }
+    }
     getWithExpiry(key) {
       const itemStr = localStorage.getItem(key)
       // Nếu không tồn tại, hoặc đã hết hạn, trả về null
@@ -144,6 +151,7 @@ class DocumentTable extends Component {
                 </div>
                 <br></br>
                 <Modal 
+                // uploadNameApi = {this.props.uploadNameApi}
                 api = {this.props.api} 
                 columns={this.props.columns}
                 title={this.props.changeTitle}

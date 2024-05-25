@@ -18,6 +18,7 @@ function Uploader({ setParentOpenForm,api,id,method,isFetchData}){
     const [dragging, setDragging] = useState(false);
     // let fetchData = isFetchData = false;
     // const [id,setId] = useState(null);
+    // console.log(apiUrl+api+id);
    
     const  handleFileUpload = (event) => {
         // const file = file;
@@ -58,7 +59,7 @@ function Uploader({ setParentOpenForm,api,id,method,isFetchData}){
                         });
                         // setOpenForm(false);
                         setParentOpenForm(false) ;
-                        isFetchData();
+                        (isFetchData&&isFetchData());
                         // console.log('Phản hồi từ API:', response);
                     } else {
                         console.error('Lỗi:', response);

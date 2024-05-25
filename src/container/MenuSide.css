@@ -74,7 +74,7 @@
     margin: 0;
 }
 .menuSide .menuSide-2nd{
-    display: none;
+    /* display: none; */
     /* display: none;   */
     /* background-color: #495158; */
     /* position: absolute; */
@@ -89,7 +89,7 @@
     height: auto;
 }
 .menuSide .menuSide-it-asset:hover .menuSide-2nd{
-    display: flex;
+    /* display: flex; */
 }
 
 .menuSide .menuSide-it-asset .menuSide-2nd a:hover{
