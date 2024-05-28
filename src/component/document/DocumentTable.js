@@ -63,8 +63,8 @@ class DocumentTable extends Component {
       
           this.setState({ user: true });
       }
+     
     }
-
     handleSearchbarValue = (value) => {
         // Xử lý giá trị state ở đây
         console.log('Searchbar value:', value);
@@ -108,6 +108,34 @@ class DocumentTable extends Component {
       }
   }
 
+  renderSearchForm = () =>{
+    // console.log(this.props.showSearch)
+    if(this.props.showSearch != false){
+      return (
+        <div className="me-md-2 navbar">
+        <div >
+            <i className="fa-solid fa-table" style={{ marginRight: '10px' }}></i> 
+            {this.props.title}
+            {this.props.button}
+            {this.props.enableEdit && (<Button 
+            variant="primary" 
+            className={`btn-show-modal ${this.props.btnAdd}`} 
+            style={{ marginLeft: '20px' }}
+            onClick={this.toggleModal} >
+              Add
+            </Button>)}
+            
+            </div>
+            <Searchbar 
+            btnID = {this.props.SearchbarId} 
+            label = {this.props.SearchbarLavel} 
+            handleSearchbarValue={this.handleSearchTerm}
+            />
+        </div>
+      )
+    }
+  }
+
     render() {
       const { showModal,rowData,user  } = this.state;
       const {enableEdit} = this.props;
@@ -117,26 +145,7 @@ class DocumentTable extends Component {
                 {/* {user && (<Navigate to="/home" replace={true} />)} */}
                     <div className="card-body">
                         <h4 className="card-title">
-                            <div className='me-md-2 navbar'>
-                            <div>
-                                <i className="fa-solid fa-table" style={{ marginRight: '10px' }}></i> 
-                                {this.props.title}
-                                {this.props.button}
-                                {enableEdit && (<Button 
-                                variant="primary" 
-                                className={`btn-show-modal ${this.props.btnAdd}`} 
-                                style={{ marginLeft: '20px' }}
-                                onClick={this.toggleModal} >
-                                  Add
-                                </Button>)}
-                                
-                                </div>
-                                <Searchbar 
-                                btnID = {this.props.SearchbarId} 
-                                label = {this.props.SearchbarLavel} 
-                                handleSearchbarValue={this.handleSearchTerm}
-                                />
-                            </div>
+                         {this.renderSearchForm()}
                         </h4>
                         <DataTable 
                         api = {this.props.api} 

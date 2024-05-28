@@ -130,6 +130,7 @@ class ItAssetComponent extends Component {
                                         enableEdit = {true}
                                         selectItem = {this.props.selectItem}
                                         changeData = {this.state.changeData}
+                                        
                                         >
                                             
                                     </DocumentTable>

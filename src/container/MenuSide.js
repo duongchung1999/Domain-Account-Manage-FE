@@ -26,8 +26,8 @@ class MenuSide extends Component {
         if(this.state.viewMenuSide2nd){
             return(
                 <div className='menuSide-2nd'>
-                    <NavItem path="/itAsset" itemName="Asset" icon = {<i class="nav-icon fa-solid fa-dolly"></i>}/>
                     <NavItem path="/cabinet" itemName="Cabinet" icon = {<i class="nav-icon fa-solid fa-boxes-stacked"></i>}/>
+                    <NavItem path="/itAsset" itemName="Asset" icon = {<i class="nav-icon fa-solid fa-dolly"></i>}/>
                     <NavItem path="/cabinetAsset" itemName="Cabinet Asset" icon = {<i class="nav-icon fa-solid fa-boxes-packing"></i>}/>
                 </div>
             )

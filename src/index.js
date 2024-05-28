@@ -16,6 +16,7 @@ import PhoneInfor from './component/phone/PhoneInfor';
 import History from './component/history/History';
 import Cabinet from './component/cabinet/Cabinet';
 import ItAsset from './component/itAsset/ItAsset';
+import CabinetAsset from './component/cabinetAsset/CabinetAsset';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -71,7 +72,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/cabinetAsset",
-    element: <Cabinet />,
+    element: <CabinetAsset />,
   },
 ]);
 
