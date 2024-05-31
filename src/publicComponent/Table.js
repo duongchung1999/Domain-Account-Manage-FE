@@ -3,10 +3,13 @@ import { useTable, useResizeColumns } from 'react-table';
 import { Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import renderIcon from './renderIcon/RenderIcon';
+import FetchGetAssetById from './fetchApi/FetchApi';
+import DropArea from './dropArea/DropArea';
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 
-const Table = ({ columns, data ,toggleModal, selectItem}) => {
+const Table = ({ columns, data ,toggleModal, selectItem, setActiveCard}) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -38,10 +41,59 @@ const Table = ({ columns, data ,toggleModal, selectItem}) => {
         );
       case 'Type':
         return <TypeCellView cell={cell} />;
+      case 'Asset of Cabinet':
+        return <CabinetAssetCellView cell={cell} />; 
       default:
         return cell.render('Cell');
     }
   };
+  const renderRowTd = (row) =>{
+    if(setActiveCard)
+    return (
+    <>
+     <tr {...row.getRowProps()} 
+        onDoubleClick={() => handleRowDoubleClick(row.original)}
+        onClick={()=>handleRowOnClick(row.original)}
+        draggable 
+        onDragStart={()=>setActiveCard(row.original)} 
+        onDragEnd={()=>setActiveCard(null)}
+        >
+        {row.cells.map(cell => (
+          <td 
+            {...cell.getCellProps()}>
+              
+            {renderCellContent(cell)}
+          </td>
+        ))}
+      
+      
+    </tr>
+    <tr role='row'>
+          
+          <DropArea/>
+    </tr>
+    
+    
+    </>
+     
+    )
+    else return  (
+      <tr {...row.getRowProps()} 
+      onDoubleClick={() => handleRowDoubleClick(row.original)}
+      onClick={()=>handleRowOnClick(row.original)}
+      >
+      {row.cells.map(cell => (
+        <td 
+          {...cell.getCellProps()}>
+            
+          {renderCellContent(cell)}
+        </td>
+      ))}
+      
+      
+    </tr>
+    )
+  }
   return (
     <div className='table-container'>
       <table className='table' {...getTableProps()}>
@@ -49,7 +101,7 @@ const Table = ({ columns, data ,toggleModal, selectItem}) => {
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column => (
-                  <th {...column.getHeaderProps()} style={{ width: column.width }}>{column.render('Header')}</th>
+                  <th  {...column.getHeaderProps()} style={{ width: column.width }}>{column.render('Header')}</th>
                 ))}
               </tr>
             ))}
@@ -58,18 +110,24 @@ const Table = ({ columns, data ,toggleModal, selectItem}) => {
             {rows.map(row => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()} 
-                  onDoubleClick={() => handleRowDoubleClick(row.original)}
-                  onClick={()=>handleRowOnClick(row.original)}
-                  >
-                  {row.cells.map(cell => (
-                    <td 
-                      {...cell.getCellProps()}>
+                // <tr {...row.getRowProps()} 
+                //   onDoubleClick={() => handleRowDoubleClick(row.original)}
+                //   onClick={()=>handleRowOnClick(row.original)}
+                //   draggable 
+                //   onDragStart={()=>setActiveCard(row.original)} 
+                //   onDragEnd={()=>setActiveCard(null)}
+                //   >
+                //   {row.cells.map(cell => (
+                //     <td 
+                //       {...cell.getCellProps()}>
                         
-                      {renderCellContent(cell)}
-                    </td>
-                  ))}
-                </tr>
+                //       {renderCellContent(cell)}
+                //     </td>
+                //   ))}
+                  
+                  
+                // </tr>
+                renderRowTd(row)
               );
             })}
           </tbody>
@@ -112,6 +170,30 @@ const Table = ({ columns, data ,toggleModal, selectItem}) => {
       </div>
     );
   };
+
+  function CabinetAssetCellView({ cell }) {
+    const [asset, setAsset] = useState(null);
+  
+    useEffect(() => {
+      async function fetchData() {
+        if (cell.row.original.assetId) {
+          const data = await FetchGetAssetById(cell.row.original.assetId);
+          setAsset(data);
+        }
+      }
+      fetchData();
+    }, [cell.row.original.assetId]);
+  
+    return (
+      <div className='view-connected'>
+        {asset ? (
+          <div>{asset}</div> // Hiển thị dữ liệu asset tùy ý bạn
+        ) : (
+          <div>Loading...</div> // Hoặc hiển thị thông báo đang tải
+        )}
+      </div>
+    );
+  }
 
   function TypeCellView({ cell }) {
     const pathRef = useRef(null);

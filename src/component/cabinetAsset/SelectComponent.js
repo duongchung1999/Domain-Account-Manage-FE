@@ -30,20 +30,21 @@ class SelectComponent extends Component {
         }
       };
       
-    handleCabinetChange = async (event) => {
-        const selectedCabinetId = event.target.value;
-        this.setState({ selectedCabinetId });
-        console.log(selectedCabinetId)
+    // handleCabinetChange = async (event) => {
+    //     const selectedCabinetId = event.target.value;
+    //     this.setState({ selectedCabinetId });
+    //     console.log(selectedCabinetId)
     
-        try {
-          const response = await apiPage.get(`/api/CabinetAsset/GetByCabinetId?id=${selectedCabinetId}`);
-          const cabinetAssets = response.data;
-          console.log(cabinetAssets)
-          this.setState({ cabinetAssets });
-        } catch (error) {
-          console.error('Error fetching cabinet assets:', error);
-        }
-      };
+    //     try {
+    //       const response = await apiPage.get(`/api/CabinetAsset/GetByCabinetId?id=${selectedCabinetId}`);
+    //       const cabinetAssets = response.data;
+    //       console.log(cabinetAssets)
+    //       this.setState({ cabinetAssets });
+    //       this.props.cabinetAssets = cabinetAssets;
+    //     } catch (error) {
+    //       console.error('Error fetching cabinet assets:', error);
+    //     }
+    //   };
     
     fetchData = async () => {
         try {
@@ -64,7 +65,7 @@ class SelectComponent extends Component {
         return (
             <div className='asset-select-container'>
                 <label htmlFor='cabinet-select'>Select Cabinet</label>
-                <select id='cabinet-select' name='cabinet' onChange={this.handleCabinetChange}>
+                <select id='cabinet-select' name='cabinet' onChange={this.props.handleCabinetChange}>
                 {this.state.cabinets.map((cabinet) => (
                     <option key={cabinet.id} value={cabinet.id}>
                     {cabinet.cabinetName}

@@ -46,6 +46,9 @@
   padding: 8px;
   text-align: center;
 }
+.table .row-task-card{
+  cursor: grab;
+}
 
 .table th {
   background-color: #f2f2f2; /* Màu nền cho các ô tiêu đề */
@@ -68,6 +71,10 @@
 }
 .table td:hover {
   background-color: #c1bfbf; /* Màu nền khi ô được chọn */
+}
+.table td:active{
+  opacity: 0.7;
+  border: 1px #111 solid;
 }
 .table tr:hover .circle-status {
   display: block;/* Màu nền khi ô được chọn */
@@ -136,6 +143,8 @@
   margin-left: 0;
   margin-top: 10px;
 }
+
+
 
 /* Cabinet */
 /* .img-asset-container {

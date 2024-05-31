@@ -155,6 +155,7 @@ class DocumentTable extends Component {
                         fetchData={this.fetchData}
                         changeData={this.state.changeData}
                         selectItem={this.props.selectItem}
+                        setActiveCard={this.props.setActiveCard}
                         />
                     </div>
                 </div>

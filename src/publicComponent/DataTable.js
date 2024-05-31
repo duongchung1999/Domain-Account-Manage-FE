@@ -79,7 +79,9 @@ class DataTable extends Component {
           data={filteredData}
           // rowData={this.props.rowData} 
           toggleModal={this.props.toggleModal} 
-          selectItem = {this.props.selectItem}/>
+          selectItem = {this.props.selectItem}
+          setActiveCard={this.props.setActiveCard}
+          />
         </div>
       );
     }
