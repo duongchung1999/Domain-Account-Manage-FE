@@ -68,10 +68,7 @@ const Table = ({ columns, data ,toggleModal, selectItem, setActiveCard}) => {
       
       
     </tr>
-    <tr role='row'>
-          
-          <DropArea/>
-    </tr>
+    <DropArea/>
     
     
     </>

@@ -17,6 +17,7 @@ import History from './component/history/History';
 import Cabinet from './component/cabinet/Cabinet';
 import ItAsset from './component/itAsset/ItAsset';
 import CabinetAsset from './component/cabinetAsset/CabinetAsset';
+import CabinetAssets from './component/cabinetAsset/CabinetAssets';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/cabinetAsset",
-    element: <CabinetAsset />,
+    element: <CabinetAssets />,
   },
 ]);
 

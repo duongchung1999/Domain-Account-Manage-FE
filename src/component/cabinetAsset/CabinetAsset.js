@@ -47,8 +47,8 @@ class CabinetAsset extends Component {
           const response = await apiPage.get(`/api/CabinetAsset/GetByCabinetId?id=${selectedCabinetId}`);
           const cabinetAssets = response.data;
           // console.log(cabinetAssets);
-          // const newData = cabinetAssets.map((item, index) => ({ ...item, number: index + 1 }));
-          this.setState({ cabinetAssets });
+          const newData = cabinetAssets.map((item, index) => ({ ...item, number: index + 1 }));
+          this.setState({ cabinetAssets:newData });
         //   this.props.cabinetAssets = cabinetAssets;
         } catch (error) {
           console.error('Error fetching cabinet assets:', error);
@@ -74,12 +74,7 @@ class CabinetAsset extends Component {
                         <h1 className='h1-table'>{this.props.title}</h1>
                         <div className='row'>
                             <div className="col">
-                                <SelectComponent
-                                     selectItem = {this.selectItem}
-                                     columns = {assetColumns}
-                                    //  cabinetAssets = {this.state.data}
-                                     handleCabinetChange = {this.handleCabinetChange}
-                                     />
+                                
                                 <DocumentTable 
                                     title={this.props.title+" Table"}
                                     changeTitle={" Information" }
@@ -98,6 +93,12 @@ class CabinetAsset extends Component {
                             </div>
 
                             <div className='col'>
+                            <SelectComponent
+                                     selectItem = {this.selectItem}
+                                     columns = {assetColumns}
+                                    //  cabinetAssets = {this.state.data}
+                                     handleCabinetChange = {this.handleCabinetChange}
+                                     />
                                     <div className="table-data-container">
                                       {this.state.setActiveCard}
                                         <Table 
@@ -137,7 +138,11 @@ const assetColumns = [
   ];
 
 const cabinetAssetColumns = [
-    
+  {
+    Header: 'No',
+    accessor: 'number',
+    width: '10%',
+  },
    
     {
       Header: 'Asset of Cabinet',

@@ -79,6 +79,9 @@
 .table tr:hover .circle-status {
   display: block;/* Màu nền khi ô được chọn */
 }
+.table tbody{
+  
+}
 .table-header {
   position: sticky;
   top: -2px;
